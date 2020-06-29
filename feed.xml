@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-06-29T12:32:17+02:00</updated><id>/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><entry><title type="html">Les options des routes d’authentification de Laravel</title><link href="/tutoriaux/2020/06/29/options-routes-auth.html" rel="alternate" type="text/html" title="Les options des routes d’authentification de Laravel" /><published>2020-06-29T07:00:00+02:00</published><updated>2020-06-29T07:00:00+02:00</updated><id>/tutoriaux/2020/06/29/options-routes-auth</id><content type="html" xml:base="/tutoriaux/2020/06/29/options-routes-auth.html">&lt;p&gt;Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Le savais-tu ? Dans Laravel, Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification.&lt;/p&gt;
+
+&lt;p&gt;Pour initialiser l’authentification sous Laravel, il faut passer par le package laravel/ui qui notamment, via un commande artisan, va te proposer de générer tout ce qu’il faut (controller, view et… routes).&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-et-utilisation-de-laravelui&quot;&gt;Installation et utilisation de Laravel/ui&lt;/h3&gt;
+
+&lt;p&gt;Pour installer cette dépendance :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;composer require laravel/ui&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;La commande pour générer toute la partie auth :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan ui bootstrap --auth&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Oui t’as vu j’ai mis bootstrap. T’as l’oeil toi !&lt;/p&gt;
+
+&lt;p&gt;Si tu veux en savoir plus (parce que y’a vue et react qui sont aussi possibles), je te pose la documentation et le repo github là.&lt;/p&gt;
+
+&lt;h3 id=&quot;les-options-sur-les-routes-dauthentification&quot;&gt;Les options sur les routes d’authentification&lt;/h3&gt;
+
+&lt;p&gt;Donc Tu te retrouves avec une nouvelle ligne dans le fichier routes/web.php&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Mais ca fait quoi ?&lt;/p&gt;
+
+&lt;p&gt;Bonne question Fred ! Cela va créer les routes pour se connecter, se déconnecter, réinitialiser son mot de passe et valider son adresse email.&lt;/p&gt;
+
+&lt;p&gt;Et si j’ai pas besoin de tout ça Jamy ?&lt;/p&gt;
+
+&lt;p&gt;Facile, cette méthode routes() prend en paramètre un tableau d’options. Tu ne me crois pas ? Il te faut une source ? Ok, tu trouveras ça sur le repo de laravel/ui avec le fichier AuthRouteMethods.&lt;/p&gt;
+
+&lt;p&gt;Qu’est ce que l’on découvre ? Un tableau d’options mais oui !&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Registration Routes...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'register'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Password Reset Routes...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'reset'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Password Confirmation Routes...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'confirm'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Email Verification Routes...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'verify'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Tu as donc compris que tu avais là sous tes yeux ébahis les options possibles. Ce qui nous donne :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'confirm'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="tutoriaux" /><category term="php laravel auth" /><summary type="html">Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification</summary></entry><entry><title type="html">Retirer la balise meta generator sous WordPress</title><link href="/tutoriaux/2020/06/28/retirer-balise-meta-generator.html" rel="alternate" type="text/html" title="Retirer la balise meta generator sous WordPress" /><published>2020-06-28T07:00:00+02:00</published><updated>2020-06-28T07:00:00+02:00</updated><id>/tutoriaux/2020/06/28/retirer-balise-meta-generator</id><content type="html" xml:base="/tutoriaux/2020/06/28/retirer-balise-meta-generator.html">&lt;p&gt;Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;En inspectant le code source d’un page web qui utilise WordPress, tu vas tomber sur cette balise méta generator :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;generator&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wordpress 5.4.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et oui, WordPress se fait un peu de pub en l’injectant par défaut.&lt;/p&gt;
+
+&lt;p&gt;A la limite pourquoi pas, mais la version exacte !&lt;/p&gt;
+
+&lt;p&gt;Donc pour empêcher l’ajout de cette ligne, il te suffit d’ajouter simplement cette ligne dans votre fichier functions.php.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;remove_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'wp_head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wp_generator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="tutoriaux" /><category term="php wordpress meta" /><summary type="html">Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</summary></entry><entry><title type="html">Règles de sécurité pour ton htaccess</title><link href="/tutoriaux/2020/06/27/regles-securite-htaccess.html" rel="alternate" type="text/html" title="Règles de sécurité pour ton htaccess" /><published>2020-06-27T07:00:00+02:00</published><updated>2020-06-27T07:00:00+02:00</updated><id>/tutoriaux/2020/06/27/regles-securite-htaccess</id><content type="html" xml:base="/tutoriaux/2020/06/27/regles-securite-htaccess.html">&lt;p&gt;Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Tu te rappelles le A de la pile LAMP ? Apache ! Oui gagné ! Et bien une partie de sa configuration se fait via le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
+
+&lt;p&gt;Je le dis tout de suite avant que tu dises “ça marche pas ! on me demande de contacter mon administrateur système !”… Dans les codes ci-dessous je pars du principe que tu as activés les modules qui vont bien !&lt;/p&gt;
+
+&lt;h3 id=&quot;redirection-vers-le-https&quot;&gt;Redirection vers le https&lt;/h3&gt;
+&lt;p&gt;Allez, la première concerne les sites ayant un certificat SSL (mais si, tu sais, y’a un petit cadenas dans la barre d’adresse de ton navigateur 🔒). Et voilà qu’un visiteur tape http://ton.site.fr sans le “S” !&lt;/p&gt;
+
+&lt;p&gt;Allez, on applique ces quelques lignes et c’est réglé :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;nc&quot;&gt;RewriteEngine&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;on&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTPS} &lt;span class=&quot;ss&quot;&gt;off&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTPS_HOST} !^%{HTTP_HOST}$ [NC]
+&lt;span class=&quot;nc&quot;&gt;RewriteRule&lt;/span&gt; ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;clickjacking&quot;&gt;Clickjacking&lt;/h3&gt;
+&lt;p&gt;Tu connais ? C’est comme le carjacking mais avec un click. Non ? Ok…&lt;/p&gt;
+
+&lt;p&gt;En bon français, ça donne “détournement de clic”. Pour en savoir plus, je te conseille cette page sur site de l’OWASP mais si t’as la flemme, il y a aussi une page sur Wikipédia.&lt;/p&gt;
+
+&lt;p&gt;Bref, ça donne :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Protect website against clickjacking &lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; X-Frame-Options SAMEORIGIN&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;xss&quot;&gt;XSS&lt;/h3&gt;
+&lt;p&gt;En mode full-text, ça donne cross-site scripting. Là encore direction l’OWASP pour plus d’info.&lt;/p&gt;
+
+&lt;p&gt;Coté implémentation, j’enchaine ci-dessous plusieurs headers visant à protéger ton site :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Prevent some browsers from MIME-sniffing the response&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; X-Content-Type-Options nosniff
+ &lt;span class=&quot;c&quot;&gt;# Content Security Policy (CSP)&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; Content-Security-Policy &quot;object-src 'self'&quot;
+ &lt;span class=&quot;c&quot;&gt;# HTTP Strict Transport Security (HSTS)&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; Strict-Transport-Security &quot;max-age=15552001; includeSubdomains; preload&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;informations-serveur&quot;&gt;Informations serveur&lt;/h3&gt;
+&lt;p&gt;Exposer la version de ton PHP, comment dire, bah non tu fais pas ça ! Vas voir cette liste des failles et tu vas comprendre.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Remove the X-Powered-By response header&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;unset&lt;/span&gt; X-Powered-By&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ah j’allais oublier, apache lui aussi peut être super sympa avec les hackers donc il vaut mieux lui demander d’être discret :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Prevent Apache from adding a trailing footer line&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;ServerSignature&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;Off&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bref, ces quelques règles de sécurité dans ton &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.&lt;/p&gt;
+
+&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name></name></author><category term="tutoriaux" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry><entry><title type="html">Mon environnement de développeur</title><link href="/billets-humeur/2020/06/26/environnement-developpeur.html" rel="alternate" type="text/html" title="Mon environnement de développeur" /><published>2020-06-26T07:00:00+02:00</published><updated>2020-06-26T07:00:00+02:00</updated><id>/billets-humeur/2020/06/26/environnement-developpeur</id><content type="html" xml:base="/billets-humeur/2020/06/26/environnement-developpeur.html">&lt;p&gt;Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;C’est bien beau de parler de développement web sur ton blog. Mais en vrai, t’utilises quoi ? C’est quoi ton environnement de développeur ?&lt;/p&gt;
+
+&lt;p&gt;Tu fais bien de me poser la question, j’avais justement envie d’écrire un article sur ce sujet.&lt;/p&gt;
+
+&lt;h3 id=&quot;mes-logiciels&quot;&gt;Mes logiciels&lt;/h3&gt;
+&lt;p&gt;Après avoir utiliser beaucoup d’IDE différent, j’utilise aujourd’hui PHPStorm. Je ferais peut-être un article à part pour détailler ma config mais en résumé j’y ai simplement tous mes repères (autocomplétion, refactoring, intégration GIT, …)&lt;/p&gt;
+
+&lt;p&gt;J’utilise Docker pour faire tourner des conteneurs avec Apache, PHP (Version 7 pour être précis) et MariaDB.&lt;/p&gt;
+
+&lt;p&gt;Mes projets sont versionnés sur Github sur lequel va se déclencher un pipeline de déploiement avec CircleCI et Capistrano.&lt;/p&gt;
+
+&lt;p&gt;Dernier élément, le navigateur. Aujourd’hui, même si Firefox et Safari sont installés, c’est Chrome que j’utilise quotidiennement.&lt;/p&gt;
+
+&lt;p&gt;Et une fois en prod ?
+Car oui c’est pas fini ! Tu croyais quoi ? Je push et basta ! En fait c’est presque ca, mais tu le sais, je le sais, bref on le sait tous, y’a parfois des bugs en prod. Si, ça arrive.&lt;/p&gt;
+
+&lt;p&gt;Bon, du coup, j’utilise Sentry pour avoir les remontés d’erreurs.&lt;/p&gt;
+
+&lt;h3 id=&quot;mon-équipement&quot;&gt;Mon équipement&lt;/h3&gt;
+&lt;p&gt;Concernant mon poste de travail, j’ai la chance qu’il soit très agréable et super bien équipé. Car en plus d’un portable, je profile de 2 écrans supplémentaires, ce qui est plutôt pratique pour séparer les différents logiciels : PHPStorm sur l’un, Chrome sur l’autre.&lt;/p&gt;
+
+&lt;p&gt;Car oui, moi, ancien utilisateur de windows, je bosse aujourd’hui sur un Mac Book Pro de 2018 et je kiff ça 🙂&lt;/p&gt;
+
+&lt;p&gt;Voilà aujourd’hui mon environnement de travail mais je sais, en tant que développeur, qu’il est amené à changer (Vagrant pourrait remplacer Docker d’ici peu par exemple). Peut importe, on est agile hein 😉&lt;/p&gt;
+
+&lt;p&gt;Liens vers les logiciels utilisés&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.fr/chrome/&quot;&gt;Chrome&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/fr-fr/phpstorm/&quot;&gt;PHPStorm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://circleci.com/&quot;&gt;CircleCI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://capistranorb.com/&quot;&gt;Capistrano&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sentry.io/&quot;&gt;Sentry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="billets-humeur" /><summary type="html">Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?</summary></entry></feed>
