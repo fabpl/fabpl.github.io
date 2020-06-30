@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html</loc>
+<lastmod>2020-06-26T07:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html</loc>
+<lastmod>2020-06-27T07:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html</loc>
+<lastmod>2020-06-28T07:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html</loc>
+<lastmod>2020-06-29T07:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://fabpl.github.io/blog.html</loc>
+</url>
+<url>
+<loc>https://fabpl.github.io/</loc>
+</url>
+</urlset>
