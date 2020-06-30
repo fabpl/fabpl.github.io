@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Règles de sécurité pour ton htaccess | Fabrice Planchette</title>
+<title>L’objet collection de Laravel | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Règles de sécurité pour ton htaccess" />
+<meta property="og:title" content="L’objet collection de Laravel" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
-<meta property="og:description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
-<link rel="canonical" href="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html" />
-<meta property="og:url" content="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html" />
+<meta name="description" content="Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt." />
+<meta property="og:description" content="Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt." />
+<link rel="canonical" href="https://fabpl.github.io/tutoriaux/2020/06/30/collections.html" />
+<meta property="og:url" content="https://fabpl.github.io/tutoriaux/2020/06/30/collections.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-06-27T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-06-30T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Règles de sécurité pour ton htaccess" />
+<meta property="twitter:title" content="L’objet collection de Laravel" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Règles de sécurité pour ton htaccess","dateModified":"2020-06-27T07:00:00+02:00","url":"https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html","datePublished":"2020-06-27T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html"},"@context":"https://schema.org"}</script>
+{"headline":"L’objet collection de Laravel","dateModified":"2020-06-30T07:00:00+02:00","url":"https://fabpl.github.io/tutoriaux/2020/06/30/collections.html","datePublished":"2020-06-30T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/tutoriaux/2020/06/30/collections.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Règles de sécurité pour ton htaccess
+        L&#39;objet collection de Laravel
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jun 27, 2020
+            </svg>Jun 30, 2020
         </div>
     </div>
 </div>
@@ -121,60 +121,78 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
+            <p>Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. 
+PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.</p>
 
 <!--more-->
 
-<p>Tu te rappelles le A de la pile LAMP ? Apache ! Oui gagné ! Et bien une partie de sa configuration se fait via le fichier <code class="language-plaintext highlighter-rouge">.htaccess</code> dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
+<h3 id="81-fonctions">81 fonctions</h3>
 
-<p>Je le dis tout de suite avant que tu dises “ça marche pas ! on me demande de contacter mon administrateur système !”… Dans les codes ci-dessous je pars du principe que tu as activés les modules qui vont bien !</p>
+<p>81 ! Il y a 81 fonctions possibles en PHP pour manipuler les tableaux (Cf <a href="https://www.php.net/manual/en/ref.array.php">php.net</a>).
+Mais là où tu peux t’arracher les cheveux (si t’en as encore) c’est dans l’implémentation de ses fonctions. 
+Là, pas de pilote dans l’avion, chacun a fait ce qu’il voulait !</p>
 
-<h3 id="redirection-vers-le-https">Redirection vers le https</h3>
-<p>Allez, la première concerne les sites ayant un certificat SSL (mais si, tu sais, y’a un petit cadenas dans la barre d’adresse de ton navigateur 🔒). Et voilà qu’un visiteur tape http://ton.site.fr sans le “S” !</p>
+<p>Exemple :</p>
 
-<p>Allez, on applique ces quelques lignes et c’est réglé :</p>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nb">array_filter</span> <span class="p">(</span> <span class="k">array</span> <span class="nv">$array</span> <span class="p">[,</span> <span class="kt">callable</span> <span class="nv">$callback</span> <span class="p">[,</span> <span class="kt">int</span> <span class="nv">$flag</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">]]</span> <span class="p">)</span> <span class="o">:</span> <span class="k">array</span>
+<span class="nb">array_map</span> <span class="p">(</span> <span class="kt">callable</span> <span class="nv">$callback</span> <span class="p">,</span> <span class="k">array</span> <span class="nv">$array1</span> <span class="p">[,</span> <span class="k">array</span> <span class="err">$</span><span class="o">...</span> <span class="p">]</span> <span class="p">)</span> <span class="o">:</span> <span class="k">array</span>
+<span class="nb">usort</span> <span class="p">(</span> <span class="k">array</span> <span class="o">&amp;</span><span class="nv">$array</span> <span class="p">,</span> <span class="kt">callable</span> <span class="nv">$value_compare_func</span> <span class="p">)</span> <span class="o">:</span> <span class="kt">bool</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nc">RewriteEngine</span> <span class="ss">on</span>
-<span class="nc">RewriteCond</span> %{HTTPS} <span class="ss">off</span>
-<span class="nc">RewriteCond</span> %{HTTPS_HOST} !^%{HTTP_HOST}$ [NC]
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]</code></pre></figure>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">array_filter</code> prend le tableau en 1er paramètre, puis un callable.</li>
+  <li><code class="language-plaintext highlighter-rouge">array_map</code> prend le tableau en 1er paramètre, puis un callable. Ah bah non, c’est l’inverse…</li>
+  <li>Quant à <code class="language-plaintext highlighter-rouge">usort</code>, il ne prend même pas la peine de renvoyer le tableau trié puisqu’il est passé en référence.</li>
+</ul>
 
-<h3 id="clickjacking">Clickjacking</h3>
-<p>Tu connais ? C’est comme le carjacking mais avec un click. Non ? Ok…</p>
+<h3 id="rien-ne-vaut-un-exemple-concret-avec-un-avantaprès">Rien ne vaut un exemple concret avec un avant/après.</h3>
 
-<p>En bon français, ça donne “détournement de clic”. Pour en savoir plus, je te conseille cette page sur site de l’OWASP mais si t’as la flemme, il y a aussi une page sur Wikipédia.</p>
+<p>Prend ce tableau tout minion :</p>
 
-<p>Bref, ça donne :</p>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">'nom'</span> <span class="o">=&gt;</span> <span class="s1">'One'</span><span class="p">,</span> <span class="s1">'valeur'</span> <span class="o">=&gt;</span> <span class="mi">12000</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'nom'</span> <span class="o">=&gt;</span> <span class="s1">'Two'</span><span class="p">,</span> <span class="s1">'valeur'</span> <span class="o">=&gt;</span> <span class="mi">20000</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'nom'</span> <span class="o">=&gt;</span> <span class="s1">'Three'</span><span class="p">,</span> <span class="s1">'valeur'</span> <span class="o">=&gt;</span> <span class="mi">14000</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'nom'</span> <span class="o">=&gt;</span> <span class="s1">'Second'</span><span class="p">,</span> <span class="s1">'valeur'</span> <span class="o">=&gt;</span> <span class="mi">9000</span><span class="p">],</span>
+<span class="p">];</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Protect website against clickjacking </span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Frame-Options SAMEORIGIN</code></pre></figure>
+<p>Et on te demande la chose suivante : Sortir les noms par ordre croissant de valeur, celle-ci devant être supérieur à 10000.
+Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour avoir du tri, du filtre et du map.</p>
 
-<h3 id="xss">XSS</h3>
-<p>En mode full-text, ça donne cross-site scripting. Là encore direction l’OWASP pour plus d’info.</p>
+<h4 id="avec-les-fonctions-natives-de-php">Avec les fonctions natives de PHP</h4>
 
-<p>Coté implémentation, j’enchaine ci-dessous plusieurs headers visant à protéger ton site :</p>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nb">usort</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$b</span><span class="p">[</span><span class="s1">'valeur'</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$a</span><span class="p">[</span><span class="s1">'valeur'</span><span class="p">];</span>
+<span class="p">});</span>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent some browsers from MIME-sniffing the response</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Content-Type-Options nosniff
- <span class="c"># Content Security Policy (CSP)</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Content-Security-Policy "object-src 'self'"
- <span class="c"># HTTP Strict Transport Security (HSTS)</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Strict-Transport-Security "max-age=15552001; includeSubdomains; preload"</code></pre></figure>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nb">array_filter</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$a</span><span class="p">[</span><span class="s1">'valeur'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10000</span><span class="p">;</span>
+<span class="p">});</span>
 
-<h3 id="informations-serveur">Informations serveur</h3>
-<p>Exposer la version de ton PHP, comment dire, bah non tu fais pas ça ! Vas voir cette liste des failles et tu vas comprendre.</p>
+<span class="nv">$names</span> <span class="o">=</span> <span class="nb">array_map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$a</span><span class="p">[</span><span class="s1">'nom'</span><span class="p">];</span>
+<span class="p">},</span> <span class="nv">$data</span><span class="p">);</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Remove the X-Powered-By response header</span>
-<span class="nc">Header</span> <span class="ss">unset</span> X-Powered-By</code></pre></figure>
+<p>Et encore j’ai été sympa, j’ai pas imbriqué toutes ces fonctions parce qu’en terme de lisibilité, c’est juste affreux.</p>
 
-<p>Ah j’allais oublier, apache lui aussi peut être super sympa avec les hackers donc il vaut mieux lui demander d’être discret :</p>
+<h4 id="avec-les-collections-de-laravel">Avec les collections de Laravel</h4>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent Apache from adding a trailing footer line</span>
-<span class="nc">ServerSignature</span> <span class="ss">Off</span></code></pre></figure>
+<p>Heureusement, Laravel et son couteau suisse Collection sont là pour nous aider :)</p>
 
-<p>Bref, ces quelques règles de sécurité dans ton <code class="language-plaintext highlighter-rouge">.htaccess</code> ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.</p>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$names</span> <span class="o">=</span> 
+    <span class="nx">collect</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">sortByDesc</span><span class="p">(</span><span class="s1">'valeur'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$a</span><span class="p">[</span><span class="s1">'valeur'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10000</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$a</span><span class="p">[</span><span class="s1">'nom'</span><span class="p">];</span>
+    <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span></code></pre></figure>
 
-<p>Et toi, t’en vois d’autre ?</p>
+<p>Hey! C’est pas beautiful ça !</p>
+
+<p>Allez va chercher bonheur sur la <a href="https://laravel.com/docs/7.x/collections">documentation Laravel</a>. Va!</p>
+
 
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -182,8 +200,8 @@
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html';
-                    this.page.identifier = 'https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html';
+                    this.page.url = 'https://fabpl.github.io/tutoriaux/2020/06/30/collections.html';
+                    this.page.identifier = 'https://fabpl.github.io/tutoriaux/2020/06/30/collections.html';
                 };
 
                 (function () {
