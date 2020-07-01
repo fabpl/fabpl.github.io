@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Retirer la balise meta generator sous WordPress | Fabrice Planchette</title>
+<title>Règles de sécurité pour ton htaccess | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Retirer la balise meta generator sous WordPress" />
+<meta property="og:title" content="Règles de sécurité pour ton htaccess" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?" />
-<meta property="og:description" content="Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?" />
-<link rel="canonical" href="https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html" />
-<meta property="og:url" content="https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html" />
+<meta name="description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
+<meta property="og:description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
+<link rel="canonical" href="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html" />
+<meta property="og:url" content="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-06-28T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-06-27T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Retirer la balise meta generator sous WordPress" />
+<meta property="twitter:title" content="Règles de sécurité pour ton htaccess" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Retirer la balise meta generator sous WordPress","dateModified":"2020-06-28T07:00:00+02:00","url":"https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html","datePublished":"2020-06-28T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html"},"@context":"https://schema.org"}</script>
+{"datePublished":"2020-06-27T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html","description":"Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.","@type":"BlogPosting","headline":"Règles de sécurité pour ton htaccess","dateModified":"2020-06-27T07:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Retirer la balise meta generator sous WordPress
+        Règles de sécurité pour ton htaccess
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jun 28, 2020
+            </svg>Jun 27, 2020
         </div>
     </div>
 </div>
@@ -121,22 +121,60 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</p>
+            <p>Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
 
 <!--more-->
 
-<p>En inspectant le code source d’un page web qui utilise WordPress, tu vas tomber sur cette balise méta generator :</p>
+<p>Tu te rappelles le A de la pile LAMP ? Apache ! Oui gagné ! Et bien une partie de sa configuration se fait via le fichier <code class="language-plaintext highlighter-rouge">.htaccess</code> dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">name</span><span class="err">"</span><span class="na">generator</span><span class="err">"</span> <span class="na">content=</span><span class="s">"Wordpress 5.4.2"</span><span class="nt">&gt;</span></code></pre></figure>
+<p>Je le dis tout de suite avant que tu dises “ça marche pas ! on me demande de contacter mon administrateur système !”… Dans les codes ci-dessous je pars du principe que tu as activés les modules qui vont bien !</p>
 
-<p>Et oui, WordPress se fait un peu de pub en l’injectant par défaut.</p>
+<h3 id="redirection-vers-le-https">Redirection vers le https</h3>
+<p>Allez, la première concerne les sites ayant un certificat SSL (mais si, tu sais, y’a un petit cadenas dans la barre d’adresse de ton navigateur 🔒). Et voilà qu’un visiteur tape http://ton.site.fr sans le “S” !</p>
 
-<p>A la limite pourquoi pas, mais la version exacte !</p>
+<p>Allez, on applique ces quelques lignes et c’est réglé :</p>
 
-<p>Donc pour empêcher l’ajout de cette ligne, il te suffit d’ajouter simplement cette ligne dans votre fichier functions.php.</p>
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nc">RewriteEngine</span> <span class="ss">on</span>
+<span class="nc">RewriteCond</span> %{HTTPS} <span class="ss">off</span>
+<span class="nc">RewriteCond</span> %{HTTPS_HOST} !^%{HTTP_HOST}$ [NC]
+<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]</code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">remove_action</span><span class="p">(</span><span class="s1">'wp_head'</span><span class="p">,</span> <span class="s1">'wp_generator'</span><span class="p">);</span></code></pre></figure>
+<h3 id="clickjacking">Clickjacking</h3>
+<p>Tu connais ? C’est comme le carjacking mais avec un click. Non ? Ok…</p>
 
+<p>En bon français, ça donne “détournement de clic”. Pour en savoir plus, je te conseille cette page sur site de l’OWASP mais si t’as la flemme, il y a aussi une page sur Wikipédia.</p>
+
+<p>Bref, ça donne :</p>
+
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Protect website against clickjacking </span>
+ <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Frame-Options SAMEORIGIN</code></pre></figure>
+
+<h3 id="xss">XSS</h3>
+<p>En mode full-text, ça donne cross-site scripting. Là encore direction l’OWASP pour plus d’info.</p>
+
+<p>Coté implémentation, j’enchaine ci-dessous plusieurs headers visant à protéger ton site :</p>
+
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent some browsers from MIME-sniffing the response</span>
+ <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Content-Type-Options nosniff
+ <span class="c"># Content Security Policy (CSP)</span>
+ <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Content-Security-Policy "object-src 'self'"
+ <span class="c"># HTTP Strict Transport Security (HSTS)</span>
+ <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Strict-Transport-Security "max-age=15552001; includeSubdomains; preload"</code></pre></figure>
+
+<h3 id="informations-serveur">Informations serveur</h3>
+<p>Exposer la version de ton PHP, comment dire, bah non tu fais pas ça ! Vas voir cette liste des failles et tu vas comprendre.</p>
+
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Remove the X-Powered-By response header</span>
+<span class="nc">Header</span> <span class="ss">unset</span> X-Powered-By</code></pre></figure>
+
+<p>Ah j’allais oublier, apache lui aussi peut être super sympa avec les hackers donc il vaut mieux lui demander d’être discret :</p>
+
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent Apache from adding a trailing footer line</span>
+<span class="nc">ServerSignature</span> <span class="ss">Off</span></code></pre></figure>
+
+<p>Bref, ces quelques règles de sécurité dans ton <code class="language-plaintext highlighter-rouge">.htaccess</code> ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.</p>
+
+<p>Et toi, t’en vois d’autre ?</p>
 
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -144,8 +182,8 @@
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html';
-                    this.page.identifier = 'https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html';
+                    this.page.url = 'https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html';
+                    this.page.identifier = 'https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html';
                 };
 
                 (function () {

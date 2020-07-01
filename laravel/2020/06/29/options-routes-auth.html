@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Règles de sécurité pour ton htaccess | Fabrice Planchette</title>
+<title>Les options des routes d’authentification de Laravel | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Règles de sécurité pour ton htaccess" />
+<meta property="og:title" content="Les options des routes d’authentification de Laravel" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
-<meta property="og:description" content="Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site." />
-<link rel="canonical" href="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html" />
-<meta property="og:url" content="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html" />
+<meta name="description" content="Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification" />
+<meta property="og:description" content="Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification" />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-06-27T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-06-29T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Règles de sécurité pour ton htaccess" />
+<meta property="twitter:title" content="Les options des routes d’authentification de Laravel" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Règles de sécurité pour ton htaccess","dateModified":"2020-06-27T07:00:00+02:00","url":"https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html","datePublished":"2020-06-27T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html"},"@context":"https://schema.org"}</script>
+{"datePublished":"2020-06-29T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html","description":"Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification","@type":"BlogPosting","headline":"Les options des routes d’authentification de Laravel","dateModified":"2020-06-29T07:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Règles de sécurité pour ton htaccess
+        Les options des routes d’authentification de Laravel
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jun 27, 2020
+            </svg>Jun 29, 2020
         </div>
     </div>
 </div>
@@ -121,60 +121,57 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
+            <p>Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification</p>
 
 <!--more-->
 
-<p>Tu te rappelles le A de la pile LAMP ? Apache ! Oui gagné ! Et bien une partie de sa configuration se fait via le fichier <code class="language-plaintext highlighter-rouge">.htaccess</code> dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</p>
+<p>Le savais-tu ? Dans Laravel, Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification.</p>
 
-<p>Je le dis tout de suite avant que tu dises “ça marche pas ! on me demande de contacter mon administrateur système !”… Dans les codes ci-dessous je pars du principe que tu as activés les modules qui vont bien !</p>
+<p>Pour initialiser l’authentification sous Laravel, il faut passer par le package laravel/ui qui notamment, via un commande artisan, va te proposer de générer tout ce qu’il faut (controller, view et… routes).</p>
 
-<h3 id="redirection-vers-le-https">Redirection vers le https</h3>
-<p>Allez, la première concerne les sites ayant un certificat SSL (mais si, tu sais, y’a un petit cadenas dans la barre d’adresse de ton navigateur 🔒). Et voilà qu’un visiteur tape http://ton.site.fr sans le “S” !</p>
+<h3 id="installation-et-utilisation-de-laravelui">Installation et utilisation de Laravel/ui</h3>
 
-<p>Allez, on applique ces quelques lignes et c’est réglé :</p>
+<p>Pour installer cette dépendance :</p>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nc">RewriteEngine</span> <span class="ss">on</span>
-<span class="nc">RewriteCond</span> %{HTTPS} <span class="ss">off</span>
-<span class="nc">RewriteCond</span> %{HTTPS_HOST} !^%{HTTP_HOST}$ [NC]
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]</code></pre></figure>
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">composer require laravel/ui</span></code></pre></figure>
 
-<h3 id="clickjacking">Clickjacking</h3>
-<p>Tu connais ? C’est comme le carjacking mais avec un click. Non ? Ok…</p>
+<p>La commande pour générer toute la partie auth :</p>
 
-<p>En bon français, ça donne “détournement de clic”. Pour en savoir plus, je te conseille cette page sur site de l’OWASP mais si t’as la flemme, il y a aussi une page sur Wikipédia.</p>
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan ui bootstrap --auth</span></code></pre></figure>
 
-<p>Bref, ça donne :</p>
+<p>Oui t’as vu j’ai mis bootstrap. T’as l’oeil toi !</p>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Protect website against clickjacking </span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Frame-Options SAMEORIGIN</code></pre></figure>
+<p>Si tu veux en savoir plus (parce que y’a vue et react qui sont aussi possibles), je te pose la documentation et le repo github là.</p>
 
-<h3 id="xss">XSS</h3>
-<p>En mode full-text, ça donne cross-site scripting. Là encore direction l’OWASP pour plus d’info.</p>
+<h3 id="les-options-sur-les-routes-dauthentification">Les options sur les routes d’authentification</h3>
 
-<p>Coté implémentation, j’enchaine ci-dessous plusieurs headers visant à protéger ton site :</p>
+<p>Donc Tu te retrouves avec une nouvelle ligne dans le fichier routes/web.php</p>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent some browsers from MIME-sniffing the response</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> X-Content-Type-Options nosniff
- <span class="c"># Content Security Policy (CSP)</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Content-Security-Policy "object-src 'self'"
- <span class="c"># HTTP Strict Transport Security (HSTS)</span>
- <span class="nc">Header</span> <span class="ss">always</span> <span class="ss">set</span> Strict-Transport-Security "max-age=15552001; includeSubdomains; preload"</code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">();</span></code></pre></figure>
 
-<h3 id="informations-serveur">Informations serveur</h3>
-<p>Exposer la version de ton PHP, comment dire, bah non tu fais pas ça ! Vas voir cette liste des failles et tu vas comprendre.</p>
+<p>Mais ca fait quoi ?</p>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Remove the X-Powered-By response header</span>
-<span class="nc">Header</span> <span class="ss">unset</span> X-Powered-By</code></pre></figure>
+<p>Bonne question Fred ! Cela va créer les routes pour se connecter, se déconnecter, réinitialiser son mot de passe et valider son adresse email.</p>
 
-<p>Ah j’allais oublier, apache lui aussi peut être super sympa avec les hackers donc il vaut mieux lui demander d’être discret :</p>
+<p>Et si j’ai pas besoin de tout ça Jamy ?</p>
 
-<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="c"># Prevent Apache from adding a trailing footer line</span>
-<span class="nc">ServerSignature</span> <span class="ss">Off</span></code></pre></figure>
+<p>Facile, cette méthode routes() prend en paramètre un tableau d’options. Tu ne me crois pas ? Il te faut une source ? Ok, tu trouveras ça sur le repo de laravel/ui avec le fichier AuthRouteMethods.</p>
 
-<p>Bref, ces quelques règles de sécurité dans ton <code class="language-plaintext highlighter-rouge">.htaccess</code> ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.</p>
+<p>Qu’est ce que l’on découvre ? Un tableau d’options mais oui !</p>
 
-<p>Et toi, t’en vois d’autre ?</p>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// Registration Routes...</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'register'</span><span class="p">]</span> <span class="o">...</span>
+<span class="c1">// Password Reset Routes...</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'reset'</span><span class="p">]</span> <span class="o">...</span>
+<span class="c1">// Password Confirmation Routes...</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'confirm'</span><span class="p">]</span> <span class="o">...</span>
+<span class="c1">// Email Verification Routes...</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'verify'</span><span class="p">]</span> <span class="o">...</span></code></pre></figure>
+
+<p>Tu as donc compris que tu avais là sous tes yeux ébahis les options possibles. Ce qui nous donne :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">([</span><span class="s1">'confirm'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">]);</span></code></pre></figure>
+
 
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -182,8 +179,8 @@
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html';
-                    this.page.identifier = 'https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html';
+                    this.page.url = 'https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html';
                 };
 
                 (function () {

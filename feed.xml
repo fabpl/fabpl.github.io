@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-06-30T19:01:40+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">L’objet collection de Laravel</title><link href="https://fabpl.github.io/tutoriaux/2020/06/30/collections.html" rel="alternate" type="text/html" title="L’objet collection de Laravel" /><published>2020-06-30T07:00:00+02:00</published><updated>2020-06-30T07:00:00+02:00</updated><id>https://fabpl.github.io/tutoriaux/2020/06/30/collections</id><content type="html" xml:base="https://fabpl.github.io/tutoriaux/2020/06/30/collections.html">&lt;p&gt;Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-07-01T08:43:16+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Ecrire un package Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/01/package.html" rel="alternate" type="text/html" title="Ecrire un package Laravel" /><published>2020-07-01T07:00:00+02:00</published><updated>2020-07-01T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/01/package</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/01/package.html">&lt;p&gt;DRY ! Oui tu as raison c’est un acronyme : Don’t Repeat Yourself - Ne te répète pas. 
+L’idée d’un package est de contenir du code qui répond à un besoin précis et qui pourra être utiliser dans diverses applications.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;création-dun-package-laravel&quot;&gt;Création d’un package Laravel&lt;/h3&gt;
+
+&lt;p&gt;Un package Laravel démarre avec 2 fichiers :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;un fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;composer.json&lt;/code&gt; qui renseignera la manière de charger tes classes (oui je parle de PSR-4 là)&lt;/li&gt;
+  &lt;li&gt;une classe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ServiceProvider&lt;/code&gt; qui sert à l’initialisation de ton package.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;composerjson&quot;&gt;Composer.json&lt;/h4&gt;
+
+&lt;p&gt;Voilà à quoi doit ressembler le fichier composer.json. 
+Tu noteras que j’ai volontairement omis les tests unitaires dans le fichier. Oui c’est volontaire, j’espère sortir un article dédié sur le sujet bientôt ;)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fabpl/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;My awesome package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;homepage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/fabpl/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MIT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;library&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;authors&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Fabrice PLANCHETTE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;role&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Developer&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;require&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;php&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^7.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;illuminate/support&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^6.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;autoload&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;psr-4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Fabpl\\Package\\&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;config&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;sort-packages&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;extra&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;laravel&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;providers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Fabpl&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Package&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;PackageServiceProvider&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;service-provider&quot;&gt;Service Provider&lt;/h3&gt;
+
+&lt;p&gt;Laravel se charge tout seul de “découvrir” notre service provider (si si, c’est écrit dans la &lt;a href=&quot;https://laravel.com/docs/7.x/packages#package-discovery&quot;&gt;documentation&lt;/a&gt;), reste plus qu’à écrire son contenu :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Fabpl\Package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Illuminate\Support\ServiceProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PackageServiceProvider&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ServiceProvider&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * Bootstrap the application services.
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;boot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * Register the application services.
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bah, t’as rien mis dans tes méthodes boot() et register ? C’est une blague ? Tu serais pas impatient toi ? Attends, je te détaille ça.&lt;/p&gt;
+
+&lt;p&gt;Déjà il faut comprendre la différence. Une fois que tous les services providers ait été enregistrés (registered), ils vont être “booter”.&lt;/p&gt;
+
+&lt;h4 id=&quot;boot&quot;&gt;Boot&lt;/h4&gt;
+
+&lt;p&gt;Tu y mettras notamment ce qui doit être “charger”. Fichiers de traduction, de migrations, les vues et… les routes.&lt;/p&gt;
+
+&lt;p&gt;Je te donne quelques exemples :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadTranslationsFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../resources/lang'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadViewsFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../resources/views'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadMigrationsFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../database/migrations'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadRoutesFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/routes.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Tu vas également renseigner ce qui peut être “publier”, c’est à dire copier vers l’application.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runningInConsole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;publishes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../config/config.php'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'package.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'config'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// Publishing the views.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;publishes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../resources/views'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resource_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'views/vendor/package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'views'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// Publishing assets.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;publishes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../resources/assets'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;public_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'vendor/package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'assets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// Publishing the translation files.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;publishes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../resources/lang'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resource_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lang/vendor/package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'lang'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et le dernier truc, c’est si tu as des commandes artisan à enregister :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runningInConsole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;FooCommand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;register&quot;&gt;Register&lt;/h4&gt;
+
+&lt;p&gt;Le 1er truc à faire c’est de merger la config par défaut que tu as mis dans ton package, et celle que pourra surcharger le développement dans son application.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mergeConfigFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/../config/config.php'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'package'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;C’est également dans cette méthode que tu vas enregistrer tes singletons.&lt;/p&gt;
+
+&lt;p&gt;Mais je t’en ai trop dit, faut aller voir &lt;a href=&quot;https://laravel.com/docs/7.x/packages&quot;&gt;la documentation sur Laravel&lt;/a&gt; maintenant.&lt;/p&gt;
+
+&lt;p&gt;Ah si j’oubliais ! Le top pour apprendre c’est de fouiller dans les packages des autres. y’a notamment &lt;a href=&quot;https://spatie.be/open-source/packages&quot;&gt;Spatie&lt;/a&gt; qui en fait énormement de package pour Laravel.&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel package" /><summary type="html">DRY ! Oui tu as raison c’est un acronyme : Don’t Repeat Yourself - Ne te répète pas. L’idée d’un package est de contenir du code qui répond à un besoin précis et qui pourra être utiliser dans diverses applications.</summary></entry><entry><title type="html">L’objet collection de Laravel</title><link href="https://fabpl.github.io/laravel/2020/06/30/collections.html" rel="alternate" type="text/html" title="L’objet collection de Laravel" /><published>2020-06-30T07:00:00+02:00</published><updated>2020-06-30T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/06/30/collections</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/06/30/collections.html">&lt;p&gt;Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. 
 PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -68,7 +204,7 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Hey! C’est pas beautiful ça !&lt;/p&gt;
 
-&lt;p&gt;Allez va chercher bonheur sur la &lt;a href=&quot;https://laravel.com/docs/7.x/collections&quot;&gt;documentation Laravel&lt;/a&gt;. Va!&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="tutoriaux" /><category term="php laravel collection" /><summary type="html">Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.</summary></entry><entry><title type="html">Les options des routes d’authentification de Laravel</title><link href="https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html" rel="alternate" type="text/html" title="Les options des routes d’authentification de Laravel" /><published>2020-06-29T07:00:00+02:00</published><updated>2020-06-29T07:00:00+02:00</updated><id>https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth</id><content type="html" xml:base="https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html">&lt;p&gt;Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification&lt;/p&gt;
+&lt;p&gt;Allez va chercher bonheur sur la &lt;a href=&quot;https://laravel.com/docs/7.x/collections&quot;&gt;documentation Laravel&lt;/a&gt;. Va!&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel collection" /><summary type="html">Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.</summary></entry><entry><title type="html">Les options des routes d’authentification de Laravel</title><link href="https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html" rel="alternate" type="text/html" title="Les options des routes d’authentification de Laravel" /><published>2020-06-29T07:00:00+02:00</published><updated>2020-06-29T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/06/29/options-routes-auth</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/06/29/options-routes-auth.html">&lt;p&gt;Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -117,7 +253,7 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Tu as donc compris que tu avais là sous tes yeux ébahis les options possibles. Ce qui nous donne :&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'confirm'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="tutoriaux" /><category term="php laravel auth" /><summary type="html">Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification</summary></entry><entry><title type="html">Retirer la balise meta generator sous WordPress</title><link href="https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html" rel="alternate" type="text/html" title="Retirer la balise meta generator sous WordPress" /><published>2020-06-28T07:00:00+02:00</published><updated>2020-06-28T07:00:00+02:00</updated><id>https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator</id><content type="html" xml:base="https://fabpl.github.io/tutoriaux/2020/06/28/retirer-balise-meta-generator.html">&lt;p&gt;Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'confirm'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel auth" /><summary type="html">Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification</summary></entry><entry><title type="html">Retirer la balise meta generator sous WordPress</title><link href="https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html" rel="alternate" type="text/html" title="Retirer la balise meta generator sous WordPress" /><published>2020-06-28T07:00:00+02:00</published><updated>2020-06-28T07:00:00+02:00</updated><id>https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator</id><content type="html" xml:base="https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html">&lt;p&gt;Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -131,7 +267,7 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Donc pour empêcher l’ajout de cette ligne, il te suffit d’ajouter simplement cette ligne dans votre fichier functions.php.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;remove_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'wp_head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wp_generator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="tutoriaux" /><category term="php wordpress meta" /><summary type="html">Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</summary></entry><entry><title type="html">Règles de sécurité pour ton htaccess</title><link href="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html" rel="alternate" type="text/html" title="Règles de sécurité pour ton htaccess" /><published>2020-06-27T07:00:00+02:00</published><updated>2020-06-27T07:00:00+02:00</updated><id>https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess</id><content type="html" xml:base="https://fabpl.github.io/tutoriaux/2020/06/27/regles-securite-htaccess.html">&lt;p&gt;Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;remove_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'wp_head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wp_generator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="wordpress" /><category term="php wordpress meta" /><summary type="html">Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</summary></entry><entry><title type="html">Règles de sécurité pour ton htaccess</title><link href="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html" rel="alternate" type="text/html" title="Règles de sécurité pour ton htaccess" /><published>2020-06-27T07:00:00+02:00</published><updated>2020-06-27T07:00:00+02:00</updated><id>https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess</id><content type="html" xml:base="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html">&lt;p&gt;Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -184,7 +320,7 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Bref, ces quelques règles de sécurité dans ton &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.&lt;/p&gt;
 
-&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="tutoriaux" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry><entry><title type="html">Mon environnement de développeur</title><link href="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html" rel="alternate" type="text/html" title="Mon environnement de développeur" /><published>2020-06-26T07:00:00+02:00</published><updated>2020-06-26T07:00:00+02:00</updated><id>https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur</id><content type="html" xml:base="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html">&lt;p&gt;Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?&lt;/p&gt;
+&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="apache" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry><entry><title type="html">Mon environnement de développeur</title><link href="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html" rel="alternate" type="text/html" title="Mon environnement de développeur" /><published>2020-06-26T07:00:00+02:00</published><updated>2020-06-26T07:00:00+02:00</updated><id>https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur</id><content type="html" xml:base="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html">&lt;p&gt;Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?&lt;/p&gt;
 
 &lt;!--more--&gt;
 

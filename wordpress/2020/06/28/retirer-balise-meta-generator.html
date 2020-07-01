@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Les options des routes d’authentification de Laravel | Fabrice Planchette</title>
+<title>Retirer la balise meta generator sous WordPress | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Les options des routes d’authentification de Laravel" />
+<meta property="og:title" content="Retirer la balise meta generator sous WordPress" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification" />
-<meta property="og:description" content="Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification" />
-<link rel="canonical" href="https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html" />
-<meta property="og:url" content="https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html" />
+<meta name="description" content="Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?" />
+<meta property="og:description" content="Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?" />
+<link rel="canonical" href="https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html" />
+<meta property="og:url" content="https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-06-29T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-06-28T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Les options des routes d’authentification de Laravel" />
+<meta property="twitter:title" content="Retirer la balise meta generator sous WordPress" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Les options des routes d’authentification de Laravel","dateModified":"2020-06-29T07:00:00+02:00","url":"https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html","datePublished":"2020-06-29T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html"},"@context":"https://schema.org"}</script>
+{"datePublished":"2020-06-28T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html","description":"Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?","@type":"BlogPosting","headline":"Retirer la balise meta generator sous WordPress","dateModified":"2020-06-28T07:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Les options des routes d’authentification de Laravel
+        Retirer la balise meta generator sous WordPress
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jun 29, 2020
+            </svg>Jun 28, 2020
         </div>
     </div>
 </div>
@@ -121,56 +121,21 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification</p>
+            <p>Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</p>
 
 <!--more-->
 
-<p>Le savais-tu ? Dans Laravel, Auth::routes() accepte un paramètre permettant d’activer ou non certaines fonctionnalités de l’authentification.</p>
+<p>En inspectant le code source d’un page web qui utilise WordPress, tu vas tomber sur cette balise méta generator :</p>
 
-<p>Pour initialiser l’authentification sous Laravel, il faut passer par le package laravel/ui qui notamment, via un commande artisan, va te proposer de générer tout ce qu’il faut (controller, view et… routes).</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">name</span><span class="err">"</span><span class="na">generator</span><span class="err">"</span> <span class="na">content=</span><span class="s">"Wordpress 5.4.2"</span><span class="nt">&gt;</span></code></pre></figure>
 
-<h3 id="installation-et-utilisation-de-laravelui">Installation et utilisation de Laravel/ui</h3>
+<p>Et oui, WordPress se fait un peu de pub en l’injectant par défaut.</p>
 
-<p>Pour installer cette dépendance :</p>
+<p>A la limite pourquoi pas, mais la version exacte !</p>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">composer require laravel/ui</span></code></pre></figure>
+<p>Donc pour empêcher l’ajout de cette ligne, il te suffit d’ajouter simplement cette ligne dans votre fichier functions.php.</p>
 
-<p>La commande pour générer toute la partie auth :</p>
-
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan ui bootstrap --auth</span></code></pre></figure>
-
-<p>Oui t’as vu j’ai mis bootstrap. T’as l’oeil toi !</p>
-
-<p>Si tu veux en savoir plus (parce que y’a vue et react qui sont aussi possibles), je te pose la documentation et le repo github là.</p>
-
-<h3 id="les-options-sur-les-routes-dauthentification">Les options sur les routes d’authentification</h3>
-
-<p>Donc Tu te retrouves avec une nouvelle ligne dans le fichier routes/web.php</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">();</span></code></pre></figure>
-
-<p>Mais ca fait quoi ?</p>
-
-<p>Bonne question Fred ! Cela va créer les routes pour se connecter, se déconnecter, réinitialiser son mot de passe et valider son adresse email.</p>
-
-<p>Et si j’ai pas besoin de tout ça Jamy ?</p>
-
-<p>Facile, cette méthode routes() prend en paramètre un tableau d’options. Tu ne me crois pas ? Il te faut une source ? Ok, tu trouveras ça sur le repo de laravel/ui avec le fichier AuthRouteMethods.</p>
-
-<p>Qu’est ce que l’on découvre ? Un tableau d’options mais oui !</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// Registration Routes...</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'register'</span><span class="p">]</span> <span class="o">...</span>
-<span class="c1">// Password Reset Routes...</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'reset'</span><span class="p">]</span> <span class="o">...</span>
-<span class="c1">// Password Confirmation Routes...</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'confirm'</span><span class="p">]</span> <span class="o">...</span>
-<span class="c1">// Email Verification Routes...</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'verify'</span><span class="p">]</span> <span class="o">...</span></code></pre></figure>
-
-<p>Tu as donc compris que tu avais là sous tes yeux ébahis les options possibles. Ce qui nous donne :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">([</span><span class="s1">'confirm'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">]);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">remove_action</span><span class="p">(</span><span class="s1">'wp_head'</span><span class="p">,</span> <span class="s1">'wp_generator'</span><span class="p">);</span></code></pre></figure>
 
 
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
@@ -179,8 +144,8 @@
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html';
-                    this.page.identifier = 'https://fabpl.github.io/tutoriaux/2020/06/29/options-routes-auth.html';
+                    this.page.url = 'https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html';
+                    this.page.identifier = 'https://fabpl.github.io/wordpress/2020/06/28/retirer-balise-meta-generator.html';
                 };
 
                 (function () {
