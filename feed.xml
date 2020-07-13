@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-07-03T15:36:37+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Les expressions régulières</title><link href="https://fabpl.github.io/code/2020/07/03/regexp.html" rel="alternate" type="text/html" title="Les expressions régulières" /><published>2020-07-03T07:00:00+02:00</published><updated>2020-07-03T07:00:00+02:00</updated><id>https://fabpl.github.io/code/2020/07/03/regexp</id><content type="html" xml:base="https://fabpl.github.io/code/2020/07/03/regexp.html">&lt;p&gt;Les expressions régulières sont un outil transverse aux langages de programmation. Et que tu sois un développeur php ou javascript ou autre, quand un collègue te demande un coup de main pour écrire sa regexp (parce que regular expression c’est trop long), tu hésites et c’est normal.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-07-13T12:01:00+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
+Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Je ne vais pas ici te parler du cache navigateur mais bien celui mis en place côté back.
+Car oui, Laravel va générer des fichiers en cache et pour plusieurs éléments :configuration, routing, vues.&lt;/p&gt;
+
+&lt;h1 id=&quot;vide-ton-cache&quot;&gt;Vide ton cache&lt;/h1&gt;
+
+&lt;p&gt;Pour effacer les fichiers mis en cache, tu as à ta disposition quelques commandes artisan.&lt;/p&gt;
+
+&lt;p&gt;Les premières commandes sont ciblées aux 3 éléments qui ont été cités précédemment :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan config:clear
+php artisan route:clear
+php artisan view:clear&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;ou de manière plus global :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan cache:clear&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;désactiver-le-cache&quot;&gt;Désactiver le cache&lt;/h1&gt;
+
+&lt;p&gt;Lors de la phase de développement, t’as pas forcement envie de lancer cette dernière commande après chaque modification de ton code.
+D’où l’idée de chercher à le désactiver complément.&lt;/p&gt;
+
+&lt;p&gt;Comment ? En regardant &lt;a href=&quot;https://laravel.com/docs/7.x/cache&quot;&gt;la doc sur le cache&lt;/a&gt;, tu trouveras… à bah non tu trouveras rien.
+Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir comment ca marche), tu trouveras bien qu’il est possible de créer &lt;a href=&quot;https://github.com/laravel/framework/blob/b78880ad600cceb90cadbac1bef4aa60a3141106/src/Illuminate/Cache/CacheManager.php#L185&quot;&gt;un “NullDriver”&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Du coup pour l’utiliser, il va falloir modifier 2 fichiers :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config/cache.php&lt;/code&gt; pour rajouter ce nouveau “driver” qui n’est pas définit par défaut,&lt;/li&gt;
+  &lt;li&gt;et le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env&lt;/code&gt; pour l’utiliser&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour le fichier de configuration :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;s1&quot;&gt;'stores'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'disabled'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'driver'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'null'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;et le fichier d’environnement :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;CACHE_DRIVER=disabled&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et voila ! Plus de cache en local :)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel cache" /><summary type="html">Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</summary></entry><entry><title type="html">Les expressions régulières</title><link href="https://fabpl.github.io/code/2020/07/03/regexp.html" rel="alternate" type="text/html" title="Les expressions régulières" /><published>2020-07-03T07:00:00+02:00</published><updated>2020-07-03T07:00:00+02:00</updated><id>https://fabpl.github.io/code/2020/07/03/regexp</id><content type="html" xml:base="https://fabpl.github.io/code/2020/07/03/regexp.html">&lt;p&gt;Les expressions régulières sont un outil transverse aux langages de programmation. Et que tu sois un développeur php ou javascript ou autre, quand un collègue te demande un coup de main pour écrire sa regexp (parce que regular expression c’est trop long), tu hésites et c’est normal.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
