@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-08-20T10:56:53+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-09-20T11:57:14+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Création d’un URL Shortener - Installation de Laravel 8</title><link href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Installation de Laravel 8" /><published>2020-09-20T07:00:00+02:00</published><updated>2020-09-20T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html">&lt;p&gt;Au commencement il n’y avait rien, puis Laravel 8 est arrivé.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;installation-de-laravel-8&quot;&gt;Installation de Laravel 8&lt;/h1&gt;
+
+&lt;p&gt;Laravel peut s’installer de deux manières différentes : Laravel Installer ou Composer create-project. 
+Perso, je préfère la deuxième méthode :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;composer create-project --prefer-dist laravel/laravel url-shortener&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/composer-create-project-laravel.png&quot; alt=&quot;Installation Laravel 8&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Une fois les différents packages installés, il suffit de lancer cette commande artisan pour lancer un serveur de développement :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan serve&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et comme le retour te l’indique, il te suffit d’ouvrir ton navigateur préféré à l’adresse &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://127.0.0.1:8000&lt;/code&gt; pour découvrir la homepage.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/laravel-homepage.png&quot; alt=&quot;Laravel 8 homepage&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/1.Installation-Laravel&quot;&gt;Code source&lt;/a&gt;&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</summary></entry><entry><title type="html">Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss</title><link href="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html" rel="alternate" type="text/html" title="Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss" /><published>2020-09-19T07:00:00+02:00</published><updated>2020-09-19T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/19/url-shortener</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html">&lt;p&gt;Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;T&lt;/strong&gt;ailwindCss&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;A&lt;/strong&gt;lpine.js&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L&lt;/strong&gt;aravel&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L&lt;/strong&gt;ivewire&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé.
+Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;on-décompose-le-projet&quot;&gt;On décompose le projet&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-installation-laravel.html&quot;&gt;Installation de Laravel 8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener&quot;&gt;Code source&lt;/a&gt;&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
 Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -530,42 +571,4 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Bref, ces quelques règles de sécurité dans ton &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.&lt;/p&gt;
 
-&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="apache" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry><entry><title type="html">Mon environnement de développeur</title><link href="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html" rel="alternate" type="text/html" title="Mon environnement de développeur" /><published>2020-06-26T07:00:00+02:00</published><updated>2020-06-26T07:00:00+02:00</updated><id>https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur</id><content type="html" xml:base="https://fabpl.github.io/billets-humeur/2020/06/26/environnement-developpeur.html">&lt;p&gt;Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;C’est bien beau de parler de développement web sur ton blog. Mais en vrai, t’utilises quoi ? C’est quoi ton environnement de développeur ?&lt;/p&gt;
-
-&lt;p&gt;Tu fais bien de me poser la question, j’avais justement envie d’écrire un article sur ce sujet.&lt;/p&gt;
-
-&lt;h3 id=&quot;mes-logiciels&quot;&gt;Mes logiciels&lt;/h3&gt;
-&lt;p&gt;Après avoir utiliser beaucoup d’IDE différent, j’utilise aujourd’hui PHPStorm. Je ferais peut-être un article à part pour détailler ma config mais en résumé j’y ai simplement tous mes repères (autocomplétion, refactoring, intégration GIT, …)&lt;/p&gt;
-
-&lt;p&gt;J’utilise Docker pour faire tourner des conteneurs avec Apache, PHP (Version 7 pour être précis) et MariaDB.&lt;/p&gt;
-
-&lt;p&gt;Mes projets sont versionnés sur Github sur lequel va se déclencher un pipeline de déploiement avec CircleCI et Capistrano.&lt;/p&gt;
-
-&lt;p&gt;Dernier élément, le navigateur. Aujourd’hui, même si Firefox et Safari sont installés, c’est Chrome que j’utilise quotidiennement.&lt;/p&gt;
-
-&lt;p&gt;Et une fois en prod ?
-Car oui c’est pas fini ! Tu croyais quoi ? Je push et basta ! En fait c’est presque ca, mais tu le sais, je le sais, bref on le sait tous, y’a parfois des bugs en prod. Si, ça arrive.&lt;/p&gt;
-
-&lt;p&gt;Bon, du coup, j’utilise Sentry pour avoir les remontés d’erreurs.&lt;/p&gt;
-
-&lt;h3 id=&quot;mon-équipement&quot;&gt;Mon équipement&lt;/h3&gt;
-&lt;p&gt;Concernant mon poste de travail, j’ai la chance qu’il soit très agréable et super bien équipé. Car en plus d’un portable, je profile de 2 écrans supplémentaires, ce qui est plutôt pratique pour séparer les différents logiciels : PHPStorm sur l’un, Chrome sur l’autre.&lt;/p&gt;
-
-&lt;p&gt;Car oui, moi, ancien utilisateur de windows, je bosse aujourd’hui sur un Mac Book Pro de 2018 et je kiff ça 🙂&lt;/p&gt;
-
-&lt;p&gt;Voilà aujourd’hui mon environnement de travail mais je sais, en tant que développeur, qu’il est amené à changer (Vagrant pourrait remplacer Docker d’ici peu par exemple). Peut importe, on est agile hein 😉&lt;/p&gt;
-
-&lt;p&gt;Liens vers les logiciels utilisés&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.google.fr/chrome/&quot;&gt;Chrome&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/fr-fr/phpstorm/&quot;&gt;PHPStorm&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://circleci.com/&quot;&gt;CircleCI&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://capistranorb.com/&quot;&gt;Capistrano&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sentry.io/&quot;&gt;Sentry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="billets-humeur" /><summary type="html">Quel est l’environnement de travail d’un développeur web ? Windows, Mac ou Linux ? VS Code ou PHPStorm ? Chrome ou Firefox ?</summary></entry></feed>
+&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="apache" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry></feed>

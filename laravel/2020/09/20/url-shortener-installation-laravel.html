@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Désactiver le cache Laravel | Fabrice Planchette</title>
+<title>Création d’un URL Shortener - Installation de Laravel 8 | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Désactiver le cache Laravel" />
+<meta property="og:title" content="Création d’un URL Shortener - Installation de Laravel 8" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours." />
-<meta property="og:description" content="Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours." />
-<link rel="canonical" href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" />
-<meta property="og:url" content="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" />
+<meta name="description" content="Au commencement il n’y avait rien, puis Laravel 8 est arrivé." />
+<meta property="og:description" content="Au commencement il n’y avait rien, puis Laravel 8 est arrivé." />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-07-13T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-09-20T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Désactiver le cache Laravel" />
+<meta property="twitter:title" content="Création d’un URL Shortener - Installation de Laravel 8" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Désactiver le cache Laravel","dateModified":"2020-07-13T07:00:00+02:00","url":"https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html","datePublished":"2020-07-13T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html"},"@context":"https://schema.org"}</script>
+{"headline":"Création d’un URL Shortener - Installation de Laravel 8","dateModified":"2020-09-20T07:00:00+02:00","url":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html","datePublished":"2020-09-20T07:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Au commencement il n’y avait rien, puis Laravel 8 est arrivé.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Désactiver le cache Laravel
+        Création d&#39;un URL Shortener - Installation de Laravel 8
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jul 13, 2020
+            </svg>Sep 20, 2020
         </div>
     </div>
 </div>
@@ -121,70 +121,37 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
-Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</p>
+            <p>Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</p>
 
 <!--more-->
 
-<p>Je ne vais pas ici te parler du cache navigateur mais bien celui mis en place côté back.
-Car oui, Laravel va générer des fichiers en cache et pour plusieurs éléments :configuration, routing, vues.</p>
+<h1 id="installation-de-laravel-8">Installation de Laravel 8</h1>
 
-<h1 id="vide-ton-cache">Vide ton cache</h1>
+<p>Laravel peut s’installer de deux manières différentes : Laravel Installer ou Composer create-project. 
+Perso, je préfère la deuxième méthode :</p>
 
-<p>Pour effacer les fichiers mis en cache, tu as à ta disposition quelques commandes artisan.</p>
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">composer create-project --prefer-dist laravel/laravel url-shortener</span></code></pre></figure>
 
-<p>Les premières commandes sont ciblées aux 3 éléments qui ont été cités précédemment :</p>
+<p><img src="/assets/img/blog/composer-create-project-laravel.png" alt="Installation Laravel 8" /></p>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan config:clear
-php artisan route:clear
-php artisan view:clear</span></code></pre></figure>
+<p>Une fois les différents packages installés, il suffit de lancer cette commande artisan pour lancer un serveur de développement :</p>
 
-<p>ou de manière plus global :</p>
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan serve</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan cache:clear</span></code></pre></figure>
+<p>Et comme le retour te l’indique, il te suffit d’ouvrir ton navigateur préféré à l’adresse <code class="language-plaintext highlighter-rouge">http://127.0.0.1:8000</code> pour découvrir la homepage.</p>
 
-<h1 id="désactiver-le-cache">Désactiver le cache</h1>
+<p><img src="/assets/img/blog/laravel-homepage.png" alt="Laravel 8 homepage" /></p>
 
-<p>Lors de la phase de développement, t’as pas forcement envie de lancer cette dernière commande après chaque modification de ton code.
-D’où l’idée de chercher à le désactiver complément.</p>
-
-<p>Comment ? En regardant <a href="https://laravel.com/docs/7.x/cache">la doc sur le cache</a>, tu trouveras… à bah non tu trouveras rien.
-Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir comment ca marche), tu trouveras bien qu’il est possible de créer <a href="https://github.com/laravel/framework/blob/b78880ad600cceb90cadbac1bef4aa60a3141106/src/Illuminate/Cache/CacheManager.php#L185">un “NullDriver”</a></p>
-
-<p>Du coup pour l’utiliser, il va falloir modifier 2 fichiers :</p>
-<ul>
-  <li>le fichier <code class="language-plaintext highlighter-rouge">config/cache.php</code> pour rajouter ce nouveau “driver” qui n’est pas définit par défaut,</li>
-  <li>et le fichier <code class="language-plaintext highlighter-rouge">.env</code> pour l’utiliser</li>
-</ul>
-
-<p>Pour le fichier de configuration :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="s1">'stores'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">'disabled'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'null'</span><span class="p">,</span>
-    <span class="p">],</span>
-
-    <span class="c1">// ...</span>
-<span class="p">],</span></code></pre></figure>
-
-<p>et le fichier d’environnement :</p>
-
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">CACHE_DRIVER=disabled</span></code></pre></figure>
-
-<p>Et voila ! Plus de cache en local :)</p>
+<p><a href="https://github.com/fabpl/url-shortener/tree/1.Installation-Laravel">Code source</a></p>
 
         </div>
 
         <div class="border-t border-gray-300 mt-10 py-10 w-full lg:w-9/12 px-4 flex justify-between">
             
-            <a href="/code/2020/07/03/regexp.html">
-                &laquo;&nbsp;Les expressions régulières
-            </a>
-            
-            
             <a href="/laravel/2020/09/19/url-shortener.html">
-                Création d'un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss&nbsp;&raquo;
+                &laquo;&nbsp;Création d'un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss
             </a>
+            
             
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -192,8 +159,8 @@ Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir c
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html';
-                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html';
+                    this.page.url = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html';
                 };
 
                 (function () {
