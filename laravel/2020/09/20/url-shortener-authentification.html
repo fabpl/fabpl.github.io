@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Fabrice Planchette | Lead Developer, Full-stack Developer, love coding.</title>
+<title>Création d’un URL Shortener - Authentification | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Fabrice Planchette" />
+<meta property="og:title" content="Création d’un URL Shortener - Authentification" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Fabrice Planchette Lead Developer - Full-Stack Developer La Rochelle, France" />
-<meta property="og:description" content="Fabrice Planchette Lead Developer - Full-Stack Developer La Rochelle, France" />
-<link rel="canonical" href="https://fabpl.github.io/" />
-<meta property="og:url" content="https://fabpl.github.io/" />
+<meta name="description" content="On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url." />
+<meta property="og:description" content="On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url." />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-20T13:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Fabrice Planchette" />
+<meta property="twitter:title" content="Création d’un URL Shortener - Authentification" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"headline":"Fabrice Planchette","url":"https://fabpl.github.io/","sameAs":["https://twitter.com/fplanchette","https://www.linkedin.com/in/fabriceplanchette","https://github.com/fabpla"],"author":{"@type":"Person","name":"Fabrice Planchette"},"description":"Fabrice Planchette Lead Developer - Full-Stack Developer La Rochelle, France","@type":"WebSite","name":"Fabrice Planchette","@context":"https://schema.org"}</script>
+{"headline":"Création d’un URL Shortener - Authentification","dateModified":"2020-09-20T13:00:00+02:00","url":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html","datePublished":"2020-09-20T13:00:00+02:00","author":{"@type":"Person","name":"Fabrice Planchette"},"description":"On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -103,433 +105,190 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Fabrice Planchette
+        Création d&#39;un URL Shortener - Authentification
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
-            <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
-                      d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-                <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-            </svg> Lead Developer - Full-Stack Developer
-        </div>
-    </div>
-    <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-        <div class="flex items-center justify-center">
-            <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd"
-                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                      clip-rule="evenodd"/>
-            </svg> La Rochelle, France
+            </svg>Sep 20, 2020
         </div>
     </div>
 </div>
 
-<div class="mt-10 py-10 border-t border-gray-300 text-left">
+<div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <h2 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">Lead Developer - Full-Stack Developer</h2>
+            <p>On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url.</p>
 
-            <h3 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-3xl">Full-Stack Developer</h3>
-            <p class="mb-2 text-gray-800">Ma carrière de développeur a débuté en tant que full-stack. Au sein d'un petit service informatique,
-                chaque développeur devait être capable de produire à la fois la partie front (HTML, CSS et Javascript)
-                mais aussi la partie back (PHP, MySQL).</p>
-            <p class="mb-2 text-gray-800">Puis le service s'est développé et les postes se sont spécialisés. Je me suis donc orienté vers le développement back mais tout en
-                continuant de m'intéresser aux technologies front, notamment sur des sujets comme les pré-css (SAAS), tasks runner (webpack), les frameworks js (Vuejs).</p>
+<!--more-->
 
-            <h3 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-3xl">Lead Developer</h3>
-            <p class="mb-2 text-gray-800">Aujourd'hui, je suis Lead developer. Je suis responsable d'une équipe de quelques développeurs sur des
-                développements internes à l'entreprise (ERP, WMS, ...) et j'apporte mon expérience technique sur des
-                sujets transverses au développement web. Désireux de transmettre mes compétences, je dirige des présentations et des formations internes lors d'ateliers qui traitent de divers sujets (Laravel).</p>
-        </div>
+<p>Une fois <a href="/laravel/2020/09/20/url-shortener-installation-laravel.html">l’installation de Laravel</a> réalisée, il nous faut gérer l’authentification (inscription, connexion, …).</p>
+
+<h1 id="lauthentification">L’authentification</h1>
+
+<p>Laravel a quelque peu évolué dans sa gestion de l’authentification.</p>
+
+<p>Au départ inclus dans l’application, Laravel a déporté toute la logique dans un package nommé <code class="language-plaintext highlighter-rouge">laravel/ui</code>. Via des commandes artisan, il était possible de générer non seulement les controlleurs, les routes, etc… mais aussi de sortir le front en couplant <code class="language-plaintext highlighter-rouge">bootstrap</code> à un framework js de son choix (<code class="language-plaintext highlighter-rouge">vuejs</code> / <code class="language-plaintext highlighter-rouge">react</code>).</p>
+
+<p>Mais ça c’était avant Laravel 8.</p>
+
+<h2 id="jeatstream">Jeatstream</h2>
+
+<p><code class="language-plaintext highlighter-rouge">laravel-ui</code> passe en déprécier au profit d’un nouveau package : <code class="language-plaintext highlighter-rouge">laravel/jeatstream</code>.</p>
+
+<p>Au menu quelques nouvelles fonctionnalités (la double authentification par exemple), mais surtout 2 stack possibles pour générer le front :</p>
+<ul>
+  <li>Blade + Livewire</li>
+  <li>Inertia + VueJS</li>
+</ul>
+
+<p>On va ici partir sur le 1er choix (je connais VueJS et c’est donc l’occasion de découvrir LiveWire).</p>
+
+<p>Il nous faut donc une nouvelle dépendance :</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">composer require laravel/jetstream</span></code></pre></figure>
+
+<p>Ensuite, on initialise notre stack avec Livewire :</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan jetstream:install livewire</span></code></pre></figure>
+
+<p>Si on s’intéresse à cette commande, on s’aperçoit que cela installe deux nouvelles dépendances :</p>
+<ul>
+  <li>Livewire</li>
+  <li>Sanctum</li>
+</ul>
+
+<p>Ce dernier contient tout le code métier de l’authentification.</p>
+
+<p>La commande a également modifié le fichier des dépendances javascript (package.json), celui de la compilation (webpack.mix.js) et ajouter un fichier tailwind.config.js.
+Vous l’avez compris, il nous faut maintenant les installer et lancer la compilation.</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">npm install &amp;&amp; npm run dev</span></code></pre></figure>
+
+<p>Dernière étape, il nous faut “migrer”, c’est à dire construire notre base de données. Pour gagner du temps, on va utiliser une base <code class="language-plaintext highlighter-rouge">sqlite</code> ce qui implique deux choses :</p>
+
+<ul>
+  <li>la création d’un fichier database.sqlite :</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">touch database/database.sqlite</span></code></pre></figure>
+
+<ul>
+  <li>et la modification du fichier <code class="language-plaintext highlighter-rouge">.env</code> :</li>
+</ul>
+
+<div class="flex flex-wrap">
+    <div class="flex flex-col">
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=</code></pre></figure>
+
     </div>
+    <div class="px-8 pt-4 flex flex-col">
+        devient
+    </div>
+    <div class="flex flex-col">
 
-    <hr class="my-6 border-gray-200"/>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">DB_CONNECTION=sqlite</code></pre></figure>
 
+    </div>
+</div>
+
+<p>Et on lance la migration :</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan migrate</span></code></pre></figure>
+
+<p>A ce moment là, tu peux rafraîchir ta home dans ton navigateur et un menu Login / register a été rajouté. La page login ressemble à ça :</p>
+
+<p><img src="/assets/img/blog/jetstream-login.png" alt="Page login avec JetStream" /></p>
+
+<p>Ok, on va créer notre premier user pour voir la suite. On va modifier le fichier <code class="language-plaintext highlighter-rouge">database/seeders/DatabaseSeeder.php</code> :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">Database\Seeders</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nn">App\Models\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Illuminate\Database\Seeder</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Illuminate\Support\Str</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">DatabaseSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * Seed the application's database.
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+            <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Fabrice'</span><span class="p">,</span>
+            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'fabrice@laravel.local'</span><span class="p">,</span>
+            <span class="s1">'email_verified_at'</span> <span class="o">=&gt;</span> <span class="nx">now</span><span class="p">(),</span>
+            <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'</span><span class="p">,</span> <span class="c1">// password</span>
+            <span class="s1">'remember_token'</span> <span class="o">=&gt;</span> <span class="nx">Str</span><span class="o">::</span><span class="na">random</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// User::factory(10)-&gt;create();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>On execute :</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan db:seed</span></code></pre></figure>
+
+<p>Et on retourne se connecter.</p>
+
+<p><img src="/assets/img/blog/jetstream-dashboard.png" alt="Page dashboard avec JetStream" /></p>
+
+<h2 id="liens">Liens</h2>
+
+<ul>
+  <li><a href="https://github.com/fabpl/url-shortener/tree/2.Authentification">Code source du projet</a></li>
+  <li><a href="https://jetstream.laravel.com/1.x/introduction.html">Documentation Laravel Jetstream</a></li>
+  <li><a href="/laravel/2020/09/20/url-shortener.html">Sommaire du projet</a></li>
+</ul>
+
+        </div>
+
+        <div class="border-t border-gray-300 mt-10 py-10 w-full lg:w-9/12 px-4 flex justify-between">
+            
+            <a href="/laravel/2020/09/20/url-shortener-installation-laravel.html">
+                &laquo;&nbsp;Création d'un URL Shortener - Installation de Laravel 8
+            </a>
+            
+            
+        </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <h4 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-2xl">Mon parcours</h4><div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Lead Developer</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Groupe Rhinos
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Périgny, 17180
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Depuis septembre 2019
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Lead developer dans un service de 20-30 développeurs back/front.</p>
-    </div>
-</div>
-<div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Chef de projet informatique</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Groupe Rhinos
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Périgny, 17180
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Depuis octobre 2017
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Chef de projet informatique sur les outils internes de la sociétés.</p>
-    </div>
-</div>
-<div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Full-Stack Developer</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Groupe Rhinos
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Périgny, 17180
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Juillet 2012 - Septembre 2019
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Développements full-stack de plateformes de stimulation commerciale / fidélisation clients.</p>
-    </div>
-</div>
-<div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Backend Developer</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Sellinity
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    La Rochelle, 17000
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Octobre 2011 - Juin 2012
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Développements d'une plateforme SAAS dédié aux hôteliers.</p>
-    </div>
-</div>
-<div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Full-Stack Developer</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Groupe Rhinos
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Périgny, 17180
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Décembre 2005 - Octobre 2011
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Développements full-stack de plateformes de stimulation commerciale / fidélisation clients.</p>
-    </div>
-</div>
-<div class="flex relative pb-12">
-    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-    </div>
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-office"><use xlink:href="#icon-office"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider mr-4">Télé-Technicien</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Sitel France
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Périgny, 17180
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Juillet 2005 - Décembre 2005
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Télé-Technicien pour les comptes ORANGE et 9TÉLÉCOM.</p>
-    </div>
-</div>
-<div class="flex relative">
-    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-        <svg class="icon icon-study"><use xlink:href="#icon-study"></use></svg>
-    </div>
-    <div class="flex-grow pl-4">
-        <div class="flex">
-            <h2 class="font-medium text-sm text-gray-900 tracking-wider mb-0 mr-4">BTS Informatique de Gestion</h2>
-            <div class="flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
-                    Lycée Douanier Rousseau
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    Laval, 53000
-                </div>
-                <div class="flex items-center text-sm leading-5 text-gray-500">
-                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                    2002 - 2004
-                </div>
-            </div>
-        </div>
-        <p class="leading-relaxed">Option : développeur d'application.</p>
-    </div>
-</div>
-</div>
-    </div>
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html';
+                };
 
-    <hr class="my-6 border-gray-200"/>
+                (function () {
+                    var d = document, s = d.createElement('script');
 
-    <div class="flex flex-wrap justify-center">
-        <div class="w-full lg:w-9/12 px-4">
-            <h4 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-2xl">Quelques unes de mes compétences</h4><div class="flex flex-wrap">
-    <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6">
-        <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Front</h2>
-        <div class="text-4xl">
-            <svg class="icon icon-html5"><use xlink:href="#icon-html5"></use></svg>
-            <svg class="icon icon-css3"><use xlink:href="#icon-css3"></use></svg>
-            <svg class="icon icon-bootstrap"><use xlink:href="#icon-bootstrap"></use></svg>
-            <svg class="icon icon-tailwindcss"><use xlink:href="#icon-tailwindcss"></use></svg>
-            <svg class="icon icon-javascript"><use xlink:href="#icon-javascript"></use></svg>
-            <svg class="icon icon-react"><use xlink:href="#icon-react"></use></svg>
-            <svg class="icon icon-vue-dot-js"><use xlink:href="#icon-vue-dot-js"></use></svg>
-            <svg class="icon icon-webpack"><use xlink:href="#icon-webpack"></use></svg>
-            <svg class="icon icon-jekyll"><use xlink:href="#icon-jekyll"></use></svg>
+                    s.src = 'https://fabpl.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+                powered by Disqus.</a></noscript>
         </div>
     </div>
-    <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l border-gray-200">
-        <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Back</h2>
-        <div class="text-4xl">
-            <svg class="icon icon-php"><use xlink:href="#icon-php"></use></svg>
-            <svg class="icon icon-symfony"><use xlink:href="#icon-symfony"></use></svg>
-            <svg class="icon icon-laravel"><use xlink:href="#icon-laravel"></use></svg>
-            <svg class="icon icon-mysql"><use xlink:href="#icon-mysql"></use></svg>
-            <svg class="icon icon-postman"><use xlink:href="#icon-postman"></use></svg>
-        </div>
-    </div>
-    <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l border-gray-200">
-        <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Logiciels</h2>
-        <div class="text-4xl">
-            <svg class="icon icon-docker"><use xlink:href="#icon-docker"></use></svg>
-            <svg class="icon icon-github"><use xlink:href="#icon-github"></use></svg>
-            <svg class="icon icon-circleci"><use xlink:href="#icon-circleci"></use></svg>
-        </div>
-    </div>
-    <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l border-gray-200">
-        <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Plateformes</h2>
-        <div class="text-4xl">
-            <svg class="icon icon-wordpress"><use xlink:href="#icon-wordpress"></use></svg>
-            <svg class="icon icon-prestashop"><use xlink:href="#icon-prestashop"></use></svg>
-        </div>
-    </div>
-</div>
-</div>
-    </div>
-
-    <hr class="my-6 border-gray-200"/>
-
-    <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-        <h5 class="flex-grow sm:pr-16 font-medium title-font text-gray-900">Tu veux en savoir plus sur ce que j'utilise au quotidien ? J'ai justement écris un article dans la partie blog qui en parle :)</h5>
-        <a href="/billets-humeur/2020/06/26/environnement-developpeur" class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded mt-10 sm:mt-0">
-            Mon environnement de développeur
-        </a>
-    </div>
-
-    <hr class="my-6 border-gray-200"/>
-
-    <div class="flex flex-wrap justify-center">
-        <div class="w-full lg:w-9/12 px-4">
-            <h4 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-2xl">Derniers articles du blog</h4>
-            <div class="flex flex-wrap">
-                
-                <div class="px-8 py-6 md:w-1/2 flex flex-col items-start">
-                    <h4 class="mb-2">Création d&#39;un URL Shortener - Authentification</h4>
-                    <p>On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url.</p>
-
-
-                    <div class="flex items-center flex-wrap mt-auto w-full">
-                        <a href="/laravel/2020/09/20/url-shortener-authentification.html" class="text-indigo-500 inline-flex items-center">
-                            Lire l'article
-                            <svg class="icon icon-arrow-right2"><use xlink:href="#icon-arrow-right2"></use></svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="px-8 py-6 md:w-1/2 flex flex-col items-start">
-                    <h4 class="mb-2">Création d&#39;un URL Shortener - Installation de Laravel 8</h4>
-                    <p>Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</p>
-
-
-                    <div class="flex items-center flex-wrap mt-auto w-full">
-                        <a href="/laravel/2020/09/20/url-shortener-installation-laravel.html" class="text-indigo-500 inline-flex items-center">
-                            Lire l'article
-                            <svg class="icon icon-arrow-right2"><use xlink:href="#icon-arrow-right2"></use></svg>
-                        </a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-
+</div></div>
 </div>
 
                         </div>

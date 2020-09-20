@@ -1,4 +1,137 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-09-20T11:57:14+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Création d’un URL Shortener - Installation de Laravel 8</title><link href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Installation de Laravel 8" /><published>2020-09-20T07:00:00+02:00</published><updated>2020-09-20T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html">&lt;p&gt;Au commencement il n’y avait rien, puis Laravel 8 est arrivé.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-09-20T14:17:46+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Création d’un URL Shortener - Authentification</title><link href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Authentification" /><published>2020-09-20T13:00:00+02:00</published><updated>2020-09-20T13:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/20/url-shortener-authentification.html">&lt;p&gt;On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Une fois &lt;a href=&quot;/laravel/2020/09/20/url-shortener-installation-laravel.html&quot;&gt;l’installation de Laravel&lt;/a&gt; réalisée, il nous faut gérer l’authentification (inscription, connexion, …).&lt;/p&gt;
+
+&lt;h1 id=&quot;lauthentification&quot;&gt;L’authentification&lt;/h1&gt;
+
+&lt;p&gt;Laravel a quelque peu évolué dans sa gestion de l’authentification.&lt;/p&gt;
+
+&lt;p&gt;Au départ inclus dans l’application, Laravel a déporté toute la logique dans un package nommé &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;laravel/ui&lt;/code&gt;. Via des commandes artisan, il était possible de générer non seulement les controlleurs, les routes, etc… mais aussi de sortir le front en couplant &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bootstrap&lt;/code&gt; à un framework js de son choix (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vuejs&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;react&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Mais ça c’était avant Laravel 8.&lt;/p&gt;
+
+&lt;h2 id=&quot;jeatstream&quot;&gt;Jeatstream&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;laravel-ui&lt;/code&gt; passe en déprécier au profit d’un nouveau package : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;laravel/jeatstream&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Au menu quelques nouvelles fonctionnalités (la double authentification par exemple), mais surtout 2 stack possibles pour générer le front :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Blade + Livewire&lt;/li&gt;
+  &lt;li&gt;Inertia + VueJS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On va ici partir sur le 1er choix (je connais VueJS et c’est donc l’occasion de découvrir LiveWire).&lt;/p&gt;
+
+&lt;p&gt;Il nous faut donc une nouvelle dépendance :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;composer require laravel/jetstream&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ensuite, on initialise notre stack avec Livewire :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan jetstream:install livewire&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Si on s’intéresse à cette commande, on s’aperçoit que cela installe deux nouvelles dépendances :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Livewire&lt;/li&gt;
+  &lt;li&gt;Sanctum&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ce dernier contient tout le code métier de l’authentification.&lt;/p&gt;
+
+&lt;p&gt;La commande a également modifié le fichier des dépendances javascript (package.json), celui de la compilation (webpack.mix.js) et ajouter un fichier tailwind.config.js.
+Vous l’avez compris, il nous faut maintenant les installer et lancer la compilation.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;npm install &amp;amp;&amp;amp; npm run dev&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Dernière étape, il nous faut “migrer”, c’est à dire construire notre base de données. Pour gagner du temps, on va utiliser une base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sqlite&lt;/code&gt; ce qui implique deux choses :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;la création d’un fichier database.sqlite :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;touch database/database.sqlite&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;et la modification du fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env&lt;/code&gt; :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;flex flex-wrap&quot;&gt;
+    &lt;div class=&quot;flex flex-col&quot;&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+    &lt;/div&gt;
+    &lt;div class=&quot;px-8 pt-4 flex flex-col&quot;&gt;
+        devient
+    &lt;/div&gt;
+    &lt;div class=&quot;flex flex-col&quot;&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;DB_CONNECTION=sqlite&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Et on lance la migration :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan migrate&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A ce moment là, tu peux rafraîchir ta home dans ton navigateur et un menu Login / register a été rajouté. La page login ressemble à ça :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/jetstream-login.png&quot; alt=&quot;Page login avec JetStream&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok, on va créer notre premier user pour voir la suite. On va modifier le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;database/seeders/DatabaseSeeder.php&lt;/code&gt; :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Database\Seeders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;App\Models\User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Illuminate\Database\Seeder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Illuminate\Support\Str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DatabaseSeeder&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Seeder&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * Seed the application's database.
+     *
+     * @return void
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'name'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Fabrice'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'email'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'fabrice@laravel.local'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'email_verified_at'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'password'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// password&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'remember_token'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// User::factory(10)-&amp;gt;create();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;On execute :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan db:seed&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et on retourne se connecter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/jetstream-dashboard.png&quot; alt=&quot;Page dashboard avec JetStream&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;liens&quot;&gt;Liens&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/2.Authentification&quot;&gt;Code source du projet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jetstream.laravel.com/1.x/introduction.html&quot;&gt;Documentation Laravel Jetstream&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener.html&quot;&gt;Sommaire du projet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel auth" /><summary type="html">On fait du classique, les utilisateurs doivent s’enregistrer/s’authentifier pour avoir accès à notre raccourcisseur d’url.</summary></entry><entry><title type="html">Création d’un URL Shortener - Installation de Laravel 8</title><link href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Installation de Laravel 8" /><published>2020-09-20T07:00:00+02:00</published><updated>2020-09-20T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/20/url-shortener-installation-laravel.html">&lt;p&gt;Au commencement il n’y avait rien, puis Laravel 8 est arrivé.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -19,7 +152,13 @@ Perso, je préfère la deuxième méthode :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/laravel-homepage.png&quot; alt=&quot;Laravel 8 homepage&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/1.Installation-Laravel&quot;&gt;Code source&lt;/a&gt;&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</summary></entry><entry><title type="html">Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss</title><link href="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html" rel="alternate" type="text/html" title="Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss" /><published>2020-09-19T07:00:00+02:00</published><updated>2020-09-19T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/19/url-shortener</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html">&lt;p&gt;Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants :&lt;/p&gt;
+&lt;h1 id=&quot;liens&quot;&gt;Liens&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/1.Installation-Laravel&quot;&gt;Code source&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://laravel.com/docs/8.x/installation&quot;&gt;Documentation Laravel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener.html&quot;&gt;Sommaire du projet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</summary></entry><entry><title type="html">Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss</title><link href="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html" rel="alternate" type="text/html" title="Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss" /><published>2020-09-19T07:00:00+02:00</published><updated>2020-09-19T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/19/url-shortener</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html">&lt;p&gt;Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants :&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;T&lt;/strong&gt;ailwindCss&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;A&lt;/strong&gt;lpine.js&lt;/li&gt;
@@ -32,14 +171,19 @@ Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourciss
 
 &lt;!--more--&gt;
 
-&lt;h1 id=&quot;on-décompose-le-projet&quot;&gt;On décompose le projet&lt;/h1&gt;
+&lt;h1 id=&quot;sommaire&quot;&gt;Sommaire&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-installation-laravel.html&quot;&gt;Installation de Laravel 8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-authentification.html&quot;&gt;Authentification&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;…&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener&quot;&gt;Code source&lt;/a&gt;&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
+&lt;h1 id=&quot;liens&quot;&gt;Liens&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener&quot;&gt;Code source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
 Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -518,57 +662,4 @@ Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour 
 
 &lt;p&gt;Donc pour empêcher l’ajout de cette ligne, il te suffit d’ajouter simplement cette ligne dans votre fichier functions.php.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;remove_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'wp_head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wp_generator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="wordpress" /><category term="php wordpress meta" /><summary type="html">Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</summary></entry><entry><title type="html">Règles de sécurité pour ton htaccess</title><link href="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html" rel="alternate" type="text/html" title="Règles de sécurité pour ton htaccess" /><published>2020-06-27T07:00:00+02:00</published><updated>2020-06-27T07:00:00+02:00</updated><id>https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess</id><content type="html" xml:base="https://fabpl.github.io/apache/2020/06/27/regles-securite-htaccess.html">&lt;p&gt;Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Tu te rappelles le A de la pile LAMP ? Apache ! Oui gagné ! Et bien une partie de sa configuration se fait via le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; dont voici quelques lignes possibles pour améliorer la sécurité de ton site.&lt;/p&gt;
-
-&lt;p&gt;Je le dis tout de suite avant que tu dises “ça marche pas ! on me demande de contacter mon administrateur système !”… Dans les codes ci-dessous je pars du principe que tu as activés les modules qui vont bien !&lt;/p&gt;
-
-&lt;h3 id=&quot;redirection-vers-le-https&quot;&gt;Redirection vers le https&lt;/h3&gt;
-&lt;p&gt;Allez, la première concerne les sites ayant un certificat SSL (mais si, tu sais, y’a un petit cadenas dans la barre d’adresse de ton navigateur 🔒). Et voilà qu’un visiteur tape http://ton.site.fr sans le “S” !&lt;/p&gt;
-
-&lt;p&gt;Allez, on applique ces quelques lignes et c’est réglé :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;nc&quot;&gt;RewriteEngine&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;on&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTPS} &lt;span class=&quot;ss&quot;&gt;off&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTPS_HOST} !^%{HTTP_HOST}$ [NC]
-&lt;span class=&quot;nc&quot;&gt;RewriteRule&lt;/span&gt; ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;clickjacking&quot;&gt;Clickjacking&lt;/h3&gt;
-&lt;p&gt;Tu connais ? C’est comme le carjacking mais avec un click. Non ? Ok…&lt;/p&gt;
-
-&lt;p&gt;En bon français, ça donne “détournement de clic”. Pour en savoir plus, je te conseille cette page sur site de l’OWASP mais si t’as la flemme, il y a aussi une page sur Wikipédia.&lt;/p&gt;
-
-&lt;p&gt;Bref, ça donne :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Protect website against clickjacking &lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; X-Frame-Options SAMEORIGIN&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;xss&quot;&gt;XSS&lt;/h3&gt;
-&lt;p&gt;En mode full-text, ça donne cross-site scripting. Là encore direction l’OWASP pour plus d’info.&lt;/p&gt;
-
-&lt;p&gt;Coté implémentation, j’enchaine ci-dessous plusieurs headers visant à protéger ton site :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Prevent some browsers from MIME-sniffing the response&lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; X-Content-Type-Options nosniff
- &lt;span class=&quot;c&quot;&gt;# Content Security Policy (CSP)&lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; Content-Security-Policy &quot;object-src 'self'&quot;
- &lt;span class=&quot;c&quot;&gt;# HTTP Strict Transport Security (HSTS)&lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;always&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;set&lt;/span&gt; Strict-Transport-Security &quot;max-age=15552001; includeSubdomains; preload&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;informations-serveur&quot;&gt;Informations serveur&lt;/h3&gt;
-&lt;p&gt;Exposer la version de ton PHP, comment dire, bah non tu fais pas ça ! Vas voir cette liste des failles et tu vas comprendre.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Remove the X-Powered-By response header&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;unset&lt;/span&gt; X-Powered-By&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ah j’allais oublier, apache lui aussi peut être super sympa avec les hackers donc il vaut mieux lui demander d’être discret :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Prevent Apache from adding a trailing footer line&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;ServerSignature&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;Off&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bref, ces quelques règles de sécurité dans ton &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt; ne vont pas te garantir un risque 0, mais au moins tu ne facilites pas la tâche à ceux qui te veulent du mal.&lt;/p&gt;
-
-&lt;p&gt;Et toi, t’en vois d’autre ?&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="apache" /><category term="apache htaccess" /><summary type="html">Une partie de la configuration apache se fait via le fichier .htaccess dont voici quelques lignes possibles pour améliorer la sécurité de ton site.</summary></entry></feed>
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;remove_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'wp_head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wp_generator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Fabrice Planchette</name></author><category term="wordpress" /><category term="php wordpress meta" /><summary type="html">Exposer la version de votre Wordpress est un risque en matière de sécurité. Injectée par défaut, comment retirer la balise méta generator ?</summary></entry></feed>
