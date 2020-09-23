@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Désactiver le cache Laravel | Fabrice Planchette</title>
+<title>Création d’un URL Shortener - Tailwind - Welcome | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Désactiver le cache Laravel" />
+<meta property="og:title" content="Création d’un URL Shortener - Tailwind - Welcome" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours." />
-<meta property="og:description" content="Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours." />
-<link rel="canonical" href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" />
-<meta property="og:url" content="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" />
+<meta name="description" content="Lors de la partie authentification, TailwindCss a fait son apparition dans divers fichiers. Allez, on creuse le sujet et on refond la homepage." />
+<meta property="og:description" content="Lors de la partie authentification, TailwindCss a fait son apparition dans divers fichiers. Allez, on creuse le sujet et on refond la homepage." />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-07-13T07:00:00+02:00" />
+<meta property="article:published_time" content="2020-09-20T16:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Désactiver le cache Laravel" />
+<meta property="twitter:title" content="Création d’un URL Shortener - Tailwind - Welcome" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"datePublished":"2020-07-13T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html","description":"Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.","@type":"BlogPosting","headline":"Désactiver le cache Laravel","dateModified":"2020-07-13T07:00:00+02:00","@context":"https://schema.org"}</script>
+{"datePublished":"2020-09-20T16:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html","description":"Lors de la partie authentification, TailwindCss a fait son apparition dans divers fichiers. Allez, on creuse le sujet et on refond la homepage.","@type":"BlogPosting","headline":"Création d’un URL Shortener - Tailwind - Welcome","dateModified":"2020-09-20T16:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Désactiver le cache Laravel
+        Création d&#39;un URL Shortener - Tailwind - Welcome
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jul 13, 2020
+            </svg>Sep 20, 2020
         </div>
     </div>
 </div>
@@ -121,70 +121,107 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
-Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</p>
+            <p>Lors de <a href="/laravel/2020/09/20/url-shortener-authentification.html">la partie authentification</a>, TailwindCss a fait son apparition dans divers fichiers. Allez, on creuse le sujet et on refond la homepage.</p>
 
 <!--more-->
 
-<p>Je ne vais pas ici te parler du cache navigateur mais bien celui mis en place côté back.
-Car oui, Laravel va générer des fichiers en cache et pour plusieurs éléments :configuration, routing, vues.</p>
+<h1 id="présentation">Présentation</h1>
 
-<h1 id="vide-ton-cache">Vide ton cache</h1>
+<blockquote>
+<p>A utility-first CSS framework for rapidly building custom designs.</p>
 
-<p>Pour effacer les fichiers mis en cache, tu as à ta disposition quelques commandes artisan.</p>
+<cite>
+Tailwind CSS is a highly customizable, low-level CSS framework that gives you 
+all of the building blocks you need to build bespoke designs without 
+any annoying opinionated styles you have to fight to override.
+  </cite>
+</blockquote>
 
-<p>Les premières commandes sont ciblées aux 3 éléments qui ont été cités précédemment :</p>
+<p>En résumé, on replace dans l’attribut class des éléments du DOM ce qu’il faut pour customiser cette élément.
+On a là une approche totalement différente d’un bootstrap, préférant fournir des composants clés en main.</p>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan config:clear
-php artisan route:clear
-php artisan view:clear</span></code></pre></figure>
+<p>Un exemple ?</p>
 
-<p>ou de manière plus global :</p>
+<p>Avec bootstrap:</p>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">php artisan cache:clear</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Primary<span class="nt">&lt;/button&gt;</span></code></pre></figure>
 
-<h1 id="désactiver-le-cache">Désactiver le cache</h1>
+<p>Avec Tailwind:</p>
 
-<p>Lors de la phase de développement, t’as pas forcement envie de lancer cette dernière commande après chaque modification de ton code.
-D’où l’idée de chercher à le désactiver complément.</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"</span><span class="nt">&gt;</span>Primary<span class="nt">&lt;/button&gt;</span></code></pre></figure>
 
-<p>Comment ? En regardant <a href="https://laravel.com/docs/7.x/cache">la doc sur le cache</a>, tu trouveras… à bah non tu trouveras rien.
-Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir comment ca marche), tu trouveras bien qu’il est possible de créer <a href="https://github.com/laravel/framework/blob/b78880ad600cceb90cadbac1bef4aa60a3141106/src/Illuminate/Cache/CacheManager.php#L185">un “NullDriver”</a></p>
+<h1 id="impacts-sur-le-projet">Impacts sur le projet</h1>
 
-<p>Du coup pour l’utiliser, il va falloir modifier 2 fichiers :</p>
+<p>On va se concentrer sur 3 fichiers ont été crées ou modifiés avec <a href="(/laravel/2020/09/20/url-shortener-authentification.html)">notre installation de jetstream</a> :</p>
 <ul>
-  <li>le fichier <code class="language-plaintext highlighter-rouge">config/cache.php</code> pour rajouter ce nouveau “driver” qui n’est pas définit par défaut,</li>
-  <li>et le fichier <code class="language-plaintext highlighter-rouge">.env</code> pour l’utiliser</li>
+  <li>resources/css/style.css</li>
+  <li>webpack.mix.js</li>
+  <li>tailwind.config.js</li>
 </ul>
 
-<p>Pour le fichier de configuration :</p>
+<h2 id="compilation">Compilation</h2>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="s1">'stores'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">'disabled'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'null'</span><span class="p">,</span>
-    <span class="p">],</span>
+<p>Sur le fichier permettant de compiler les fichiers de styles/scripts, tu remarqueras l’ajout via postCss de Tailwind. On en reparle avec le fichier de configuration de Tailwind.</p>
 
-    <span class="c1">// ...</span>
-<span class="p">],</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mix</span><span class="p">.</span><span class="nx">js</span><span class="p">(</span><span class="dl">'</span><span class="s1">resources/js/app.js</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public/js</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">postCss</span><span class="p">(</span><span class="dl">'</span><span class="s1">resources/css/app.css</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public/css</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span>
+        <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">postcss-import</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">tailwindcss</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">]);</span></code></pre></figure>
 
-<p>et le fichier d’environnement :</p>
+<h2 id="feuille-de-styles">Feuille de styles</h2>
 
-<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">CACHE_DRIVER=disabled</span></code></pre></figure>
+<p>Dans la feuille de style, les éléments de tailwind sont importés.</p>
 
-<p>Et voila ! Plus de cache en local :)</p>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="k">@import</span> <span class="s2">'tailwindcss/base'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'tailwindcss/components'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'tailwindcss/utilities'</span><span class="p">;</span></code></pre></figure>
+
+<h2 id="configuration-tailwind">Configuration tailwind</h2>
+
+<p>Plus intéressante, le fichier de config de tailwind.
+Ici, tu remarqueras un élément “purge”. Oui car tailwind importe un max de classe. Amuse-toi à retirer cet étape et tu verras le poids de ton fichier css :)
+L’intérêt ici est donc de parser les fichiers où tu mets des classes tailwind, en l’occurrence tes fichiers de vue, et de ne garder dans le fichier css généré que les classes utilisées.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">defaultTheme</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">tailwindcss/defaultTheme</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">purge</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">./storage/framework/views/*.php</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">./resources/views/**/*.blade.php</span><span class="dl">'</span><span class="p">],</span>
+
+    <span class="na">theme</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">extend</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">fontFamily</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">sans</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Nunito</span><span class="dl">'</span><span class="p">,</span> <span class="p">...</span><span class="nx">defaultTheme</span><span class="p">.</span><span class="nx">fontFamily</span><span class="p">.</span><span class="nx">sans</span><span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+
+    <span class="na">variants</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">opacity</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">responsive</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">hover</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">],</span>
+    <span class="p">},</span>
+
+    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">@tailwindcss/ui</span><span class="dl">'</span><span class="p">)],</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>Ce sont donc tout un ensemble de classe qu’il faut ici appréhender. J’avoue que les composants <em>bootstrap</em> s’avèrent être de puissants outils qui, à titre personnel, m’apportent aujourd’hui un certain confort dont je n’ai pas envie de me passer.
+Sinon pour voir ce que ça donne (parce que t’as pas lu tout ça pour rien 😉), direction directement le fichier <a href="https://github.com/fabpl/url-shortener/blob/3.Tailwind-Welcome/resources/views/welcome.blade.php">welcome.blade.php sur github</a>.</p>
+
+<h1 id="liens">Liens</h1>
+
+<ul>
+  <li><a href="https://github.com/fabpl/url-shortener/tree/3.Tailwind-Welcome">Code source du projet</a></li>
+  <li><a href="https://tailwindcss.com/docs/installation">Documentation de Tailwind</a></li>
+  <li><a href="/laravel/2020/09/20/url-shortener.html">Sommaire du projet</a></li>
+</ul>
 
         </div>
 
         <div class="border-t border-gray-300 mt-10 py-10 w-full lg:w-9/12 px-4 flex justify-between">
             
-            <a href="/code/2020/07/03/regexp.html">
-                &laquo;&nbsp;Les expressions régulières
+            <a href="/laravel/2020/09/20/url-shortener-authentification.html">
+                &laquo;&nbsp;Création d'un URL Shortener - Authentification
             </a>
             
-            
-            <a href="/laravel/2020/09/19/url-shortener.html">
-                Création d'un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss&nbsp;&raquo;
-            </a>
             
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -192,8 +229,8 @@ Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir c
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html';
-                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html';
+                    this.page.url = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2020/09/20/url-shortener-tailwind-welcome.html';
                 };
 
                 (function () {
