@@ -1,4 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-09-24T13:34:47+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Création d’un URL Shortener - Gestion des liens</title><link href="https://fabpl.github.io/laravel/2020/09/24/url-shortener-link.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Gestion des liens" /><published>2020-09-24T07:00:00+02:00</published><updated>2020-09-24T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/24/url-shortener-link</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/24/url-shortener-link.html">&lt;p&gt;On s’attaque maintenant au coeur de notre application : la gestion des liens de redirection.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2020-09-25T14:04:24+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Création d’un URL Shortener - Backend</title><link href="https://fabpl.github.io/laravel/2020/09/25/url-shortener-backend.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Backend" /><published>2020-09-25T07:00:00+02:00</published><updated>2020-09-25T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/25/url-shortener-backend</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/25/url-shortener-backend.html">&lt;p&gt;Tout est prêt pour maintenant concevoir le backend : une zone ou l’utilisateur authentifié pourra gérer ses liens de redirection.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;On va donc remplacer le composant “welcome” de la page créer par défaut lorsque l’on a &lt;a href=&quot;/laravel/2020/09/20/url-shortener-authentification.html&quot;&gt;installé jetstream&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour cela, on commence par générer ce composant &lt;em&gt;Livewire&lt;/em&gt; :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan make:livewire Links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;On obtient donc 2 nouveaux fichiers :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;La classe composant &lt;em&gt;Links&lt;/em&gt; située dans &lt;em&gt;app/Http/Livewire&lt;/em&gt;,&lt;/li&gt;
+  &lt;li&gt;La vue blade dans &lt;em&gt;resources/views/livewire/links.blade.php&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Direction le fichier &lt;em&gt;dashboard.blade.php&lt;/em&gt; pour remplacer l’élément &lt;em&gt;x-jet-welcome&lt;/em&gt; par la syntaxe suivante :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-blade&quot; data-lang=&quot;blade&quot;&gt;@livewire('links')&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Commençons donc par envoyer nos liens et pour cela il faut modifier la méthode &lt;em&gt;render()&lt;/em&gt; du composant.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;WithPagination&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'livewire.links'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'links'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereUserId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;paginate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;Livewire&lt;/em&gt; est capable de gérer la pagination mais pour cela le trait &lt;em&gt;WithPagination&lt;/em&gt; doit être ajouter à notre composant.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-blade&quot; data-lang=&quot;blade&quot;&gt;&amp;lt;table class=&quot;min-w-full divide-y divide-gray-200&quot;&amp;gt;
+    &amp;lt;thead&amp;gt;
+    &amp;lt;tr&amp;gt;
+        &amp;lt;th class=&quot;px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase&quot;&amp;gt;
+            {{ __('Uid') }}
+        &amp;lt;/th&amp;gt;
+        &amp;lt;th class=&quot;px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase&quot;&amp;gt;
+            {{ __('Url') }}
+        &amp;lt;/th&amp;gt;
+        &amp;lt;th class=&quot;px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase&quot;&amp;gt;
+            {{ __('Actions') }}
+        &amp;lt;/th&amp;gt;
+    &amp;lt;/tr&amp;gt;
+    &amp;lt;/thead&amp;gt;
+    &amp;lt;tbody class=&quot;bg-white divide-y divide-gray-200&quot;&amp;gt;
+    @foreach ($links as $link)
+        &amp;lt;tr&amp;gt;
+            &amp;lt;td class=&quot;px-6 py-4 whitespace-no-wrap&quot;&amp;gt;
+                {{ $link-&amp;gt;uid }}
+            &amp;lt;/td&amp;gt;
+            &amp;lt;td class=&quot;px-6 py-4 whitespace-no-wrap&quot;&amp;gt;
+                {{ $link-&amp;gt;url }}
+            &amp;lt;/td&amp;gt;
+            &amp;lt;td class=&quot;px-6 py-4 whitespace-no-wrap&quot;&amp;gt;
+                &amp;lt;a href=&quot;#&quot; wire:click=&quot;delete({{ $link-&amp;gt;id }})&quot;&amp;gt;
+                    {{ __('Delete') }}
+                &amp;lt;/a&amp;gt;
+            &amp;lt;/td&amp;gt;
+        &amp;lt;/tr&amp;gt;
+    @endforeach
+    &amp;lt;/tbody&amp;gt;
+&amp;lt;/table&amp;gt;
+
+&amp;lt;div class=&quot;px-4 py-3 border-t border-gray-200 sm:px-6&quot;&amp;gt;
+    {{ $links-&amp;gt;links() }}
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour rajouter une action dans notre tableau (celle de supprimer une ligne), il suffit d’utiliser la syntaxe &lt;em&gt;wire:click&lt;/em&gt; au lien et d’implémenter la méthode dans notre composant. Ce qui donne :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-blade&quot; data-lang=&quot;blade&quot;&gt;public function delete(int $id)
+{
+    Link::whereId($id)-&amp;gt;whereUserId(Auth::user()-&amp;gt;id)-&amp;gt;delete();
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bon là je fais au plus vite pour le tuto, il y aurait plein de choses à ajuster (utilisation de scope, du softDeletes, etc…).&lt;/p&gt;
+
+&lt;p&gt;Et maintenant… Non en fait c’est tout. On vient en quelques lignes de générer un tableau paginé avec un chargement de données et des actions en “ajax”. Sympa non ?&lt;/p&gt;
+
+&lt;h1 id=&quot;liens&quot;&gt;Liens&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/5.backend&quot;&gt;Code source du projet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://laravel-livewire.com/docs/2.x/quickstart&quot;&gt;Documentation de Livewire&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener.html&quot;&gt;Sommaire du projet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Tout est prêt pour maintenant concevoir le backend : une zone ou l’utilisateur authentifié pourra gérer ses liens de redirection.</summary></entry><entry><title type="html">Création d’un URL Shortener - Gestion des liens</title><link href="https://fabpl.github.io/laravel/2020/09/24/url-shortener-link.html" rel="alternate" type="text/html" title="Création d’un URL Shortener - Gestion des liens" /><published>2020-09-24T07:00:00+02:00</published><updated>2020-09-24T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/24/url-shortener-link</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/24/url-shortener-link.html">&lt;p&gt;On s’attaque maintenant au coeur de notre application : la gestion des liens de redirection.&lt;/p&gt;
 
 &lt;p&gt;Pour cela il nous faut :&lt;/p&gt;
 &lt;ul&gt;
@@ -712,74 +799,4 @@ Tu noteras que j’ai volontairement omis les tests unitaires dans le fichier. O
 
 &lt;p&gt;Mais je t’en ai trop dit, faut aller voir &lt;a href=&quot;https://laravel.com/docs/7.x/packages&quot;&gt;la documentation sur Laravel&lt;/a&gt; maintenant.&lt;/p&gt;
 
-&lt;p&gt;Ah si j’oubliais ! Le top pour apprendre c’est de fouiller dans les packages des autres. y’a notamment &lt;a href=&quot;https://spatie.be/open-source/packages&quot;&gt;Spatie&lt;/a&gt; qui en fait énormement de package pour Laravel.&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel package" /><summary type="html">DRY ! Oui tu as raison c’est un acronyme : Don’t Repeat Yourself - Ne te répète pas. L’idée d’un package est de contenir du code qui répond à un besoin précis et qui pourra être utiliser dans diverses applications.</summary></entry><entry><title type="html">L’objet collection de Laravel</title><link href="https://fabpl.github.io/laravel/2020/06/30/collections.html" rel="alternate" type="text/html" title="L’objet collection de Laravel" /><published>2020-06-30T07:00:00+02:00</published><updated>2020-06-30T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/06/30/collections</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/06/30/collections.html">&lt;p&gt;Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. 
-PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h3 id=&quot;81-fonctions&quot;&gt;81 fonctions&lt;/h3&gt;
-
-&lt;p&gt;81 ! Il y a 81 fonctions possibles en PHP pour manipuler les tableaux (Cf &lt;a href=&quot;https://www.php.net/manual/en/ref.array.php&quot;&gt;php.net&lt;/a&gt;).
-Mais là où tu peux t’arracher les cheveux (si t’en as encore) c’est dans l’implémentation de ses fonctions. 
-Là, pas de pilote dans l’avion, chacun a fait ce qu’il voulait !&lt;/p&gt;
-
-&lt;p&gt;Exemple :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nb&quot;&gt;array_filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$array&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;callable&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$callback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;array_map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;callable&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$callback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$array1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;usort&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$array&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;callable&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$value_compare_func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;array_filter&lt;/code&gt; prend le tableau en 1er paramètre, puis un callable.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;array_map&lt;/code&gt; prend le tableau en 1er paramètre, puis un callable. Ah bah non, c’est l’inverse…&lt;/li&gt;
-  &lt;li&gt;Quant à &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;usort&lt;/code&gt;, il ne prend même pas la peine de renvoyer le tableau trié puisqu’il est passé en référence.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;rien-ne-vaut-un-exemple-concret-avec-un-avantaprès&quot;&gt;Rien ne vaut un exemple concret avec un avant/après.&lt;/h3&gt;
-
-&lt;p&gt;Prend ce tableau tout minion :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'One'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Two'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Three'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Second'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et on te demande la chose suivante : Sortir les noms par ordre croissant de valeur, celle-ci devant être supérieur à 10000.
-Pourquoi on te demanderai ca ? C’est pour l’exemple je te dis. C’est pour avoir du tri, du filtre et du map.&lt;/p&gt;
-
-&lt;h4 id=&quot;avec-les-fonctions-natives-de-php&quot;&gt;Avec les fonctions natives de PHP&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nb&quot;&gt;usort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;array_filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;array_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et encore j’ai été sympa, j’ai pas imbriqué toutes ces fonctions parce qu’en terme de lisibilité, c’est juste affreux.&lt;/p&gt;
-
-&lt;h4 id=&quot;avec-les-collections-de-laravel&quot;&gt;Avec les collections de Laravel&lt;/h4&gt;
-
-&lt;p&gt;Heureusement, Laravel et son couteau suisse Collection sont là pour nous aider :)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-    &lt;span class=&quot;nx&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sortByDesc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valeur'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'nom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Hey! C’est pas beautiful ça !&lt;/p&gt;
-
-&lt;p&gt;Allez va chercher bonheur sur la &lt;a href=&quot;https://laravel.com/docs/7.x/collections&quot;&gt;documentation Laravel&lt;/a&gt;. Va!&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel collection" /><summary type="html">Manipuler un ensemble de données sous forme de tableau, pour un développeur backend, c’est un peu la base. PHP dispose ainsi d’une palanqué de fonctions (oui j’avais envie de placer ce mot…) et qui ont été implémentées, comment dire…, non j’te dis pas, je te montre plutôt.</summary></entry></feed>
+&lt;p&gt;Ah si j’oubliais ! Le top pour apprendre c’est de fouiller dans les packages des autres. y’a notamment &lt;a href=&quot;https://spatie.be/open-source/packages&quot;&gt;Spatie&lt;/a&gt; qui en fait énormement de package pour Laravel.&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel package" /><summary type="html">DRY ! Oui tu as raison c’est un acronyme : Don’t Repeat Yourself - Ne te répète pas. L’idée d’un package est de contenir du code qui répond à un besoin précis et qui pourra être utiliser dans diverses applications.</summary></entry></feed>
