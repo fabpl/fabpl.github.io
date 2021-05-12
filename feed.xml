@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-03-09T18:13:19+01:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Améliorer la lisibilité de son code sous Laravel avec quelques helpers</title><link href="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html" rel="alternate" type="text/html" title="Améliorer la lisibilité de son code sous Laravel avec quelques helpers" /><published>2021-03-09T06:00:00+01:00</published><updated>2021-03-09T06:00:00+01:00</updated><id>https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html">&lt;p&gt;Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-05-12T17:51:56+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Créer une macro sous Laravel</title><link href="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html" rel="alternate" type="text/html" title="Créer une macro sous Laravel" /><published>2021-05-12T07:00:00+02:00</published><updated>2021-05-12T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/05/12/macro-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html">&lt;p&gt;Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;macroable-&quot;&gt;Macroable ?&lt;/h2&gt;
+
+&lt;p&gt;Dans certaines classes “core” de Laravel, un trait est injecté : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;use Macroable;&lt;/code&gt;.
+Tu le trouveras par exemple dans les classes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Collection&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Redirect&lt;/code&gt;, … et pleins d’autres.
+Ce trait va te permettre de créer tes propres méthodes.&lt;/p&gt;
+
+&lt;h2 id=&quot;exemple-avec-redirect&quot;&gt;Exemple avec Redirect&lt;/h2&gt;
+
+&lt;p&gt;Prend par exemple la classe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Redirect&lt;/code&gt;. Elle dispose d’une méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;with&lt;/code&gt; qui permet d’assigner une variable qui sera disponible sur la page de redirection.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'status'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Well done.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ok, et si on souhaite rajouter une notion de type, pour que côté front on puisse différencier un message de succès (et le mettre en vert), d’un message d’alerte (et le mettre un rouge, oui ils sont comme ça les devs front). 
+Tu me vois venir ?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'status'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Well done.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'status_type'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'success'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Voilà, on châine, ça marche mais c’est pas beau. L’idéal serait de pouvoir écrire ça :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'success'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Well done.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Non ?&lt;/p&gt;
+
+&lt;p&gt;Cherche pas, la réponse est OUI !&lt;/p&gt;
+
+&lt;p&gt;Donc c’est là qu’on parle de macro. Pour enregistrer notre méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alert&lt;/code&gt;, ça se passe dans la méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot()&lt;/code&gt; d’un service provider (AppServiceProvider ira très bien) :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Redirect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;macro&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'alert'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'status'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'status_type'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;C’est pas beautiful ?&lt;/p&gt;
+
+&lt;h2 id=&quot;exemple-avec-filesystem&quot;&gt;Exemple avec Filesystem&lt;/h2&gt;
+
+&lt;p&gt;Un autre exemple ? Extraire un fichier zip, ca prend 4 lignes :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ZipArchive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Si t’es comme moi, t’as envie d’écrire ça en une seule ligne non ?!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nb&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extractZip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et bien, il me suffit d’écrire la macro suivante :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Filesystem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;macro&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'extractZip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ZipArchive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$extractTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$zip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Allez, je te laisse taper “Laravel macro” dans ton moteur de recherche préféré et tu devrais tomber sur d’autres exemples ;)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel macro" /><summary type="html">Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.</summary></entry><entry><title type="html">Améliorer la lisibilité de son code sous Laravel avec quelques helpers</title><link href="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html" rel="alternate" type="text/html" title="Améliorer la lisibilité de son code sous Laravel avec quelques helpers" /><published>2021-03-09T06:00:00+01:00</published><updated>2021-03-09T06:00:00+01:00</updated><id>https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html">&lt;p&gt;Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -601,140 +660,4 @@ Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir c
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;CACHE_DRIVER=disabled&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Et voila ! Plus de cache en local :)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel cache" /><summary type="html">Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</summary></entry><entry><title type="html">Les expressions régulières</title><link href="https://fabpl.github.io/code/2020/07/03/regexp.html" rel="alternate" type="text/html" title="Les expressions régulières" /><published>2020-07-03T07:00:00+02:00</published><updated>2020-07-03T07:00:00+02:00</updated><id>https://fabpl.github.io/code/2020/07/03/regexp</id><content type="html" xml:base="https://fabpl.github.io/code/2020/07/03/regexp.html">&lt;p&gt;Les expressions régulières sont un outil transverse aux langages de programmation. Et que tu sois un développeur php ou javascript ou autre, quand un collègue te demande un coup de main pour écrire sa regexp (parce que regular expression c’est trop long), tu hésites et c’est normal.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h3 id=&quot;pourquoi-les-regexp-&quot;&gt;Pourquoi les regexp ?&lt;/h3&gt;
-
-&lt;p&gt;C’est une sorte de fonction de recherche dans une chaîne de caractères. Mais pas que. En plus, elles permettent aussi faire de la validation ou de l’extraction de données.&lt;/p&gt;
-
-&lt;p&gt;Donc si tu veux :&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;valider le format d’une chaîne (ex : une adresse web),&lt;/li&gt;
-  &lt;li&gt;extraire une portion de chaîne (ex : le type de rue dans une adresse)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Les regexp sont là pour toi.&lt;/p&gt;
-
-&lt;h3 id=&quot;délimiteurs&quot;&gt;Délimiteurs&lt;/h3&gt;
-
-&lt;p&gt;Une regexp est toujours entourée de délimiteur. Tu peux mettre ce que tu veux mais hésite pas trop longtemps. Perso entre le &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; et le &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; mon coeur balance.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/regexp/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Prenons la chaîne suivante : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hello world!&lt;/code&gt;.
-Pour tester que &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;world&lt;/code&gt; est présent, ça donne simplement :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/world/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;début-et-fin-de-chaîne&quot;&gt;Début et fin de chaîne&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Ok mais moi je veux tester que ca commence par “world”.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Tu es bien exigeant jeune padawan, mais pour répondre à ta question, c’est pour ça qu’il existe des marqueurs de début et fin de chaîne : respectivement &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^&lt;/code&gt; et &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/^world/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;les-caractères&quot;&gt;Les caractères&lt;/h3&gt;
-
-&lt;p&gt;Bon un mot exact dans une chaîne c’est bien mignon mais dans la vrai vie (de dev) ta recherche est plus abstraite que ça. 
-Donc voici comment tu peux utiliser les caractères dans ta regexp :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;[a-z] : Caractères minuscules de a à z.&lt;/li&gt;
-  &lt;li&gt;[0-9] : Chiffres de 0 à 9.&lt;/li&gt;
-  &lt;li&gt;[a-z0-9] : Lettres de « a » à « z » ou chiffres de 0 à 9.&lt;/li&gt;
-  &lt;li&gt;#[^0-9]# : Chaîne ne contenant PAS de chiffres.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;T’as vu le dernier de la liste ? 
-Pour faire une négation c’est avec un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^&lt;/code&gt;, le même caractère que pour un début de chaîne. 
-Ouai faut le savoir…&lt;/p&gt;
-
-&lt;h3 id=&quot;les-quantifieurs&quot;&gt;Les quantifieurs&lt;/h3&gt;
-
-&lt;p&gt;Bah oui, ça va avec les caractères que l’on a vu au-dessus.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;#a?# : « a » peut apparaître 0 ou 1 fois.&lt;/li&gt;
-  &lt;li&gt;#a+# : « a » doit apparaître au moins 1 fois.&lt;/li&gt;
-  &lt;li&gt;#a*# : « a » peut apparaître 0, 1 ou plusieurs fois.&lt;/li&gt;
-  &lt;li&gt;#a{3}# : « a » doit apparaître 3 fois exactement (« aaa »).&lt;/li&gt;
-  &lt;li&gt;#a{3,5}# : « a » doit apparaître de 3 à 5 fois (« aaa », « aaaa », « aaaaa »).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Donc si on applique la regexp suivante sur notre &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hello world!&lt;/code&gt; ca marche ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/[a-z]+/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et non ! La majuscule, l’espace et le point d’exclamation, tu ne gères pas ces éléments dans ta regexp.&lt;/p&gt;
-
-&lt;p&gt;Ca sert à rien mais si tu veux valider ton &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hello world!&lt;/code&gt;, ça donnerait plutôt :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/^[a-zA-Z !]+$/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Au fait, tu ne m’as pas demandé pourquoi des délimiteurs ? 
-Du coup j’y répond quand même : c’est parce que y’a des options possibles et qu’ils se mettent en fin de l’expression.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/regexp/options&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Tu veux la liste de ces options ? Ok, voici :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;g : Global&lt;/li&gt;
-  &lt;li&gt;m : Multiline&lt;/li&gt;
-  &lt;li&gt;i : Case insensitive&lt;/li&gt;
-  &lt;li&gt;x : Ignore whitespace&lt;/li&gt;
-  &lt;li&gt;s : Single line&lt;/li&gt;
-  &lt;li&gt;u : Unicode&lt;/li&gt;
-  &lt;li&gt;X : eXtended&lt;/li&gt;
-  &lt;li&gt;U : Ungreedy&lt;/li&gt;
-  &lt;li&gt;A : Anchor&lt;/li&gt;
-  &lt;li&gt;J : Duplicate group names&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Tu as reperé le &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; pour gérer la casse ? Donc ça veut dire qu’on peut améliorer notre regexp :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/^[a-z !]+$/i&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;quelques-exemples&quot;&gt;Quelques exemples&lt;/h3&gt;
-
-&lt;p&gt;Allez en vrac quelques regexp pour te montrer ce que ça peut vite devenir compliquer.&lt;/p&gt;
-
-&lt;h4 id=&quot;mot-de-passe-complexe&quot;&gt;Mot de passe complexe&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/^ # Début de chaîne
-(?=(.*[0-9])) # Au moins 1 chiffre
-(?=.*[a-z]) # Au moins 1 minuscule
-(?=(.*[A-Z])) # Au moins 1 majuscule
-(?=.*[\!@#$%^&amp;amp;*()\\\\[\]{}\-_+=~`|:;&quot;\'&amp;lt;&amp;gt;,.\/?]) # Au moins 1 caractère spéciale
-(?=(.*)).{8,} # Au moins 8 caractères
-$ # Fin de chaîne/mx&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://regex101.com/r/DM6YCF/1&quot;&gt;Tester sur regex101&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;numéro-de-sécurité-sociale&quot;&gt;Numéro de sécurité sociale&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-regexp&quot; data-lang=&quot;regexp&quot;&gt;/^ # début de chaîne
-(?&amp;lt;sexe&amp;gt;[12]) # 1 ou 2 pour le sexe
-(?&amp;lt;naissance&amp;gt;[0-9]{2}(?:0[1-9]|1[0-2])) # année et mois de naissance (aamm)
-(?&amp;lt;departement&amp;gt;2[AB]|[0-9]{2}) # le département
-(?&amp;lt;postal_code&amp;gt;[0-9]{3}) # suite du code postal sur trois chiffres
-(?&amp;lt;numserie&amp;gt;[0-9]{3}) # numéro de série sur trois chiffres
-(?&amp;lt;controle&amp;gt;[0-9]{2})? # numéro de contrôle (facultatif)
-$ # fin de chaîne/x&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://regex101.com/r/c3dn9F/1&quot;&gt;Tester sur regex101&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Bah c’est quoi les &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?&amp;lt;...&amp;gt;&lt;/code&gt; que tu nous mets là ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;C’est pour nommer tes groupes, ça rend les éléments que tu captures plus lisible je trouve.&lt;/p&gt;
-
-&lt;p&gt;Car oui je n’ai fait que survoler le sujet, il y a encore des choses à dire (les shortcodes, l’échappement, …), mais je te laisse faire tes propres recherches ;)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="code" /><category term="regexp" /><summary type="html">Les expressions régulières sont un outil transverse aux langages de programmation. Et que tu sois un développeur php ou javascript ou autre, quand un collègue te demande un coup de main pour écrire sa regexp (parce que regular expression c’est trop long), tu hésites et c’est normal.</summary></entry></feed>
+&lt;p&gt;Et voila ! Plus de cache en local :)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel cache" /><summary type="html">Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</summary></entry></feed>

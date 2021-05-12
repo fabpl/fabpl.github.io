@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Améliorer la lisibilité de son code sous Laravel avec quelques helpers | Fabrice Planchette</title>
+<title>Créer une macro sous Laravel | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Améliorer la lisibilité de son code sous Laravel avec quelques helpers" />
+<meta property="og:title" content="Créer une macro sous Laravel" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code." />
-<meta property="og:description" content="Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code." />
-<link rel="canonical" href="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html" />
-<meta property="og:url" content="https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html" />
+<meta name="description" content="Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel." />
+<meta property="og:description" content="Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel." />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-09T06:00:00+01:00" />
+<meta property="article:published_time" content="2021-05-12T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Améliorer la lisibilité de son code sous Laravel avec quelques helpers" />
+<meta property="twitter:title" content="Créer une macro sous Laravel" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"datePublished":"2021-03-09T06:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html","description":"Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code.","@type":"BlogPosting","headline":"Améliorer la lisibilité de son code sous Laravel avec quelques helpers","dateModified":"2021-03-09T06:00:00+01:00","@context":"https://schema.org"}</script>
+{"datePublished":"2021-05-12T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html","description":"Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.","@type":"BlogPosting","headline":"Créer une macro sous Laravel","dateModified":"2021-05-12T07:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Améliorer la lisibilité de son code sous Laravel avec quelques helpers
+        Créer une macro sous Laravel
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Mar 9, 2021
+            </svg>May 12, 2021
         </div>
     </div>
 </div>
@@ -121,57 +121,75 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Les helpers sous Laravel ne sont que des fonctions “raccourcis” mais qui permettent, à mon sens, d’améliorer grandement la lisibilité du code.</p>
+            <p>Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.</p>
 
 <!--more-->
 
-<h2 id="lever-une-exception-http">Lever une exception HTTP</h2>
+<h2 id="macroable-">Macroable ?</h2>
 
-<p>Si tu as besoin de lever une exception (403, 404, …) dans ton controller, Laravel dispose de la fonction <code class="language-plaintext highlighter-rouge">abort</code> qui s’utilise comme ceci :</p>
+<p>Dans certaines classes “core” de Laravel, un trait est injecté : <code class="language-plaintext highlighter-rouge">use Macroable;</code>.
+Tu le trouveras par exemple dans les classes <code class="language-plaintext highlighter-rouge">Collection</code>, <code class="language-plaintext highlighter-rouge">Request</code>, <code class="language-plaintext highlighter-rouge">Redirect</code>, … et pleins d’autres.
+Ce trait va te permettre de créer tes propres méthodes.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$some_condition</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s1">'Unauthorized action.'</span><span class="p">);</span>
-<span class="p">}</span></code></pre></figure>
+<h2 id="exemple-avec-redirect">Exemple avec Redirect</h2>
 
-<p>Mais pour aller un petit plus loin, il existe aussi <code class="language-plaintext highlighter-rouge">abort_if</code> qui diminue le nombre de ligne de code :</p>
+<p>Prend par exemple la classe <code class="language-plaintext highlighter-rouge">Redirect</code>. Elle dispose d’une méthode <code class="language-plaintext highlighter-rouge">with</code> qui permet d’assigner une variable qui sera disponible sur la page de redirection.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">abort_if</span><span class="p">(</span><span class="nv">$some_condition</span><span class="p">,</span> <span class="mi">403</span><span class="p">,</span> <span class="s1">'Unauthorized action.'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">'status'</span><span class="p">,</span> <span class="s1">'Well done.'</span><span class="p">);</span></code></pre></figure>
 
-<p>Il existe également son “contraire”, à savoir <code class="language-plaintext highlighter-rouge">abort_unless</code> que j’aurais tendance à déconseiller car cela provoque une lecture en double négation par très lisible à mon gout.</p>
+<p>Ok, et si on souhaite rajouter une notion de type, pour que côté front on puisse différencier un message de succès (et le mettre en vert), d’un message d’alerte (et le mettre un rouge, oui ils sont comme ça les devs front). 
+Tu me vois venir ?</p>
 
-<h2 id="faire-une-redirection-http">Faire une redirection HTTP</h2>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">'status'</span><span class="p">,</span> <span class="s1">'Well done.'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">'status_type'</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">);</span></code></pre></figure>
 
-<p>Voici la fonction la plus lisible pour générer une redirection HTTP et dans l’optique de ne pas passer par la facade <code class="language-plaintext highlighter-rouge">Redirect</code> :</p>
+<p>Voilà, on châine, ça marche mais c’est pas beau. L’idéal serait de pouvoir écrire ça :</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/path/to'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'Well done.'</span><span class="p">);</span></code></pre></figure>
 
-<p>Et si tu veux juste renvoyer l’utilisateur d’où il vient (par exemple sur l’update d’une ressource), tu as la fonction <code class="language-plaintext highlighter-rouge">back()</code></p>
+<p>Non ?</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nx">back</span><span class="p">();</span></code></pre></figure>
+<p>Cherche pas, la réponse est OUI !</p>
 
-<p>Je te laisse consulter la <a href="https://laravel.com/docs/8.x/redirects">documentation Laravel sur les redirections</a> pour voir toutes les possibilités derrière ses fonctions.</p>
+<p>Donc c’est là qu’on parle de macro. Pour enregistrer notre méthode <code class="language-plaintext highlighter-rouge">alert</code>, ça se passe dans la méthode <code class="language-plaintext highlighter-rouge">boot()</code> d’un service provider (AppServiceProvider ira très bien) :</p>
 
-<h2 id="récupérer-la-date-courante">Récupérer la date courante</h2>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Redirect</span><span class="o">::</span><span class="na">macro</span><span class="p">(</span><span class="s1">'alert'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$type</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">'status'</span><span class="p">,</span> <span class="nv">$message</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">'status_type'</span><span class="p">,</span> <span class="nv">$type</span><span class="p">);</span>
+<span class="p">});</span></code></pre></figure>
 
-<p>Laravel utilise le package <a href="https://carbon.nesbot.com">Carbon</a> pour facilement manipuler les dates et donc les objets <code class="language-plaintext highlighter-rouge">Datetime</code>. 
-Mais là encore, plutôt que de passer par la facade <code class="language-plaintext highlighter-rouge">Date</code> ou encore la classe <code class="language-plaintext highlighter-rouge">Carbon</code> (que cela soit celle du package ou celle dans le namespace Support d’ailleurs), Laravel fournit 2 helpers renvoyant des instances :</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">now()</code> pour une instance initialisée à la seconde près,</li>
-  <li><code class="language-plaintext highlighter-rouge">today()</code> pour une instance sur la date du jour.</li>
-</ul>
+<p>C’est pas beautiful ?</p>
+
+<h2 id="exemple-avec-filesystem">Exemple avec Filesystem</h2>
+
+<p>Un autre exemple ? Extraire un fichier zip, ca prend 4 lignes :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$zip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ZipArchive</span><span class="p">();</span>
+<span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">open</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+<span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">extractTo</span><span class="p">(</span><span class="nv">$extractTo</span><span class="p">);</span>
+<span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span></code></pre></figure>
+
+<p>Si t’es comme moi, t’as envie d’écrire ça en une seule ligne non ?!</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nb">File</span><span class="o">::</span><span class="na">extractZip</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="nv">$extractTo</span><span class="p">);</span></code></pre></figure>
+
+<p>Et bien, il me suffit d’écrire la macro suivante :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">Filesystem</span><span class="o">::</span><span class="na">macro</span><span class="p">(</span><span class="s1">'extractZip'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">string</span> <span class="nv">$path</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$extractTo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$zip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ZipArchive</span><span class="p">();</span>
+    <span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">open</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+    <span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">extractTo</span><span class="p">(</span><span class="nv">$extractTo</span><span class="p">);</span>
+    <span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>Allez, je te laisse taper “Laravel macro” dans ton moteur de recherche préféré et tu devrais tomber sur d’autres exemples ;)</p>
 
         </div>
 
         <div class="border-t border-gray-300 mt-10 py-10 w-full lg:w-9/12 px-4 flex justify-between">
             
-            <a href="/git/2021/02/11/nommer-commits.html">
-                &laquo;&nbsp;Nommer ses commits dans git
+            <a href="/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html">
+                &laquo;&nbsp;Améliorer la lisibilité de son code sous Laravel avec quelques helpers
             </a>
             
-            
-            <a href="/laravel/2021/05/12/macro-laravel.html">
-                Créer une macro sous Laravel&nbsp;&raquo;
-            </a>
             
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -179,8 +197,8 @@ Mais là encore, plutôt que de passer par la facade <code class="language-plain
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html';
-                    this.page.identifier = 'https://fabpl.github.io/laravel/2021/03/09/ameliorer-lisibilite-code-helpers-laravel.html';
+                    this.page.url = 'https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html';
                 };
 
                 (function () {
