@@ -1,4 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-05-12T17:51:56+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Créer une macro sous Laravel</title><link href="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html" rel="alternate" type="text/html" title="Créer une macro sous Laravel" /><published>2021-05-12T07:00:00+02:00</published><updated>2021-05-12T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/05/12/macro-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html">&lt;p&gt;Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-06-18T09:00:35+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Les scopes dans les modèles Laravel</title><link href="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html" rel="alternate" type="text/html" title="Les scopes dans les modèles Laravel" /><published>2021-06-18T07:00:00+02:00</published><updated>2021-06-18T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html">&lt;p&gt;Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle.
+On va donc avoir ce qui peut modifier la requête du &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Query Builder&lt;/code&gt; de ce modèle dans celui-ci et pas ailleurs.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;scope-&quot;&gt;Scope ?&lt;/h2&gt;
+
+&lt;p&gt;Imagine tu as une table posts (et son modèle Post), et que dans cette table tu as une colonne vote (je t’explique pas pourquoi cette colonne, t’as compris).
+Pour récupérer les posts ayant reçu plus de 100 votes, ça donnerait :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'votes'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Mais en mettant ça dans un scope, cela devient :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Méthode à placer dans le modèle&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scopePopular&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'votes'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Et pour récupérer ces articles&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;popular&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Joli non ?&lt;/p&gt;
+
+&lt;h2 id=&quot;date-de-création-dans-un-intervalle-donné&quot;&gt;Date de création dans un intervalle donné&lt;/h2&gt;
+
+&lt;p&gt;Imagine (encore) que tu as ce même modèle Post et que tu veux récupérer les entrées créées entre 2 dates. 
+Si tu fonces tête baissée, ça donne :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt; 
+&lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-05-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-06-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereBetween&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ok, ça marche. Sauf que &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;created_at&lt;/code&gt; est un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;datetime&lt;/code&gt;, donc la partie heure/minute/seconde passe à la trappe et tu
+perds 24h sur la dernière journée. Ah! le piège!&lt;/p&gt;
+
+&lt;p&gt;Bon en fait, le plus simple serait de ne pas utiliser de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BETWEEN&lt;/code&gt; dans ce cas mais simplement de borner en utilisant la
+méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;whereDate()&lt;/code&gt;. Voici ce que ça donne :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt; 
+&lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-05-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-06-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;gt;='&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;='&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;C’est sympa mais comme on ne veut pas réécrire ça à chaque fois (#dry), on va déplacer ça dans… un scope ! Bien tu suis !&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt; 
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scopeCreatedBetweenDates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DateTimeInterface&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DateTimeInterface&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;gt;='&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;whereDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;='&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et pour l’utiliser, rien de plus simple :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt; 
+&lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-05-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Carbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createFromFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2021-06-17'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createdBetweenDates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$startDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$endDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;C’est sympa les scopes hein ?!&lt;/p&gt;
+
+&lt;h2 id=&quot;liens&quot;&gt;Liens&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://laravel.com/docs/8.x/eloquent#local-scopes&quot;&gt;Documentation Laravel Eloquent Scopes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://laravel.com/docs/8.x/queries#additional-where-clauses&quot;&gt;Documentation Laravel Queries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel eloquent model scope" /><summary type="html">Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle. On va donc avoir ce qui peut modifier la requête du Query Builder de ce modèle dans celui-ci et pas ailleurs.</summary></entry><entry><title type="html">Créer une macro sous Laravel</title><link href="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html" rel="alternate" type="text/html" title="Créer une macro sous Laravel" /><published>2021-05-12T07:00:00+02:00</published><updated>2021-05-12T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/05/12/macro-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/05/12/macro-laravel.html">&lt;p&gt;Les macros Laravel permettent d’ajouter ses propres méthodes à une classe interne à Laravel.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -610,54 +683,4 @@ Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourciss
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener&quot;&gt;Code source&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry><entry><title type="html">Désactiver le cache Laravel</title><link href="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html" rel="alternate" type="text/html" title="Désactiver le cache Laravel" /><published>2020-07-13T07:00:00+02:00</published><updated>2020-07-13T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/07/13/desactiver-cache</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/07/13/desactiver-cache.html">&lt;p&gt;Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! 
-Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Je ne vais pas ici te parler du cache navigateur mais bien celui mis en place côté back.
-Car oui, Laravel va générer des fichiers en cache et pour plusieurs éléments :configuration, routing, vues.&lt;/p&gt;
-
-&lt;h1 id=&quot;vide-ton-cache&quot;&gt;Vide ton cache&lt;/h1&gt;
-
-&lt;p&gt;Pour effacer les fichiers mis en cache, tu as à ta disposition quelques commandes artisan.&lt;/p&gt;
-
-&lt;p&gt;Les premières commandes sont ciblées aux 3 éléments qui ont été cités précédemment :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan config:clear
-php artisan route:clear
-php artisan view:clear&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;ou de manière plus global :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;php artisan cache:clear&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h1 id=&quot;désactiver-le-cache&quot;&gt;Désactiver le cache&lt;/h1&gt;
-
-&lt;p&gt;Lors de la phase de développement, t’as pas forcement envie de lancer cette dernière commande après chaque modification de ton code.
-D’où l’idée de chercher à le désactiver complément.&lt;/p&gt;
-
-&lt;p&gt;Comment ? En regardant &lt;a href=&quot;https://laravel.com/docs/7.x/cache&quot;&gt;la doc sur le cache&lt;/a&gt;, tu trouveras… à bah non tu trouveras rien.
-Et pourtant, si tu fouilles dans le code source (bah ouai j’aime bien savoir comment ca marche), tu trouveras bien qu’il est possible de créer &lt;a href=&quot;https://github.com/laravel/framework/blob/b78880ad600cceb90cadbac1bef4aa60a3141106/src/Illuminate/Cache/CacheManager.php#L185&quot;&gt;un “NullDriver”&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Du coup pour l’utiliser, il va falloir modifier 2 fichiers :&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config/cache.php&lt;/code&gt; pour rajouter ce nouveau “driver” qui n’est pas définit par défaut,&lt;/li&gt;
-  &lt;li&gt;et le fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env&lt;/code&gt; pour l’utiliser&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Pour le fichier de configuration :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;s1&quot;&gt;'stores'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'disabled'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;'driver'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'null'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;et le fichier d’environnement :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;CACHE_DRIVER=disabled&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et voila ! Plus de cache en local :)&lt;/p&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel cache" /><summary type="html">Dans les meilleurs excuses de développeur, je demande le numéro 1 et de loin : Vide ton cache ! Car oui, tu le sais aussi bien que moi, un cache c’est bien pratique pour gagner en performance, mais ça peut jouer des tours.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry></feed>
