@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-06-18T09:00:35+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Les scopes dans les modèles Laravel</title><link href="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html" rel="alternate" type="text/html" title="Les scopes dans les modèles Laravel" /><published>2021-06-18T07:00:00+02:00</published><updated>2021-06-18T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html">&lt;p&gt;Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://fabpl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fabpl.github.io/" rel="alternate" type="text/html" /><updated>2021-07-21T14:09:15+02:00</updated><id>https://fabpl.github.io/feed.xml</id><title type="html">Fabrice Planchette</title><subtitle>Lead Developer, Full-stack Developer, love coding.</subtitle><author><name>Fabrice Planchette</name></author><entry><title type="html">Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel</title><link href="https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html" rel="alternate" type="text/html" title="Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel" /><published>2021-07-21T07:00:00+02:00</published><updated>2021-07-21T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html">&lt;p&gt;Dans la continuité des scopes, la modification du &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Query Builder&lt;/code&gt; peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;when-&quot;&gt;when() ?&lt;/h2&gt;
+
+&lt;p&gt;Imagine que tu veuilles proposer le tri des résultats d’un modèle.
+Pour cela non, ne fonce pas tête baissée sur un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if&lt;/code&gt; ou un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;switch&lt;/code&gt; dans ton controlleur, on a dit d’une que &lt;a href=&quot;c'était plus joli dans un `scope` du modèle&quot;&gt;https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html&lt;/a&gt;, et de deux qu’avec un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when()&lt;/code&gt; en plus ça devient beautiful.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Dans le controlleur&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Et dans le modèle&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Builder&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$sort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sort'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'name'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orderByName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'created_at'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orderByCreatedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; 
+        &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orderByName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Tu l’as vu ? Le deuxième paramètre de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when()&lt;/code&gt; ? Et oui, ça te permet de gérer du fallback si tu veux.&lt;/p&gt;
+
+&lt;h2 id=&quot;liens&quot;&gt;Liens&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://laravel.com/docs/8.x/queries#conditional-clauses&quot;&gt;Documentation Laravel Queries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel query-builder scope when" /><summary type="html">Dans la continuité des scopes, la modification du Query Builder peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode when().</summary></entry><entry><title type="html">Les scopes dans les modèles Laravel</title><link href="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html" rel="alternate" type="text/html" title="Les scopes dans les modèles Laravel" /><published>2021-06-18T07:00:00+02:00</published><updated>2021-06-18T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel</id><content type="html" xml:base="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html">&lt;p&gt;Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle.
 On va donc avoir ce qui peut modifier la requête du &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Query Builder&lt;/code&gt; de ce modèle dans celui-ci et pas ailleurs.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -657,30 +693,4 @@ Perso, je préfère la deuxième méthode :&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener/tree/1.Installation-Laravel&quot;&gt;Code source&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://laravel.com/docs/8.x/installation&quot;&gt;Documentation Laravel&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/19/url-shortener.html&quot;&gt;Sommaire du projet&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</summary></entry><entry><title type="html">Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss</title><link href="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html" rel="alternate" type="text/html" title="Création d’un URL Shortener avec la stack Laravel 8 / Livewire / TailwindCss" /><published>2020-09-19T07:00:00+02:00</published><updated>2020-09-19T07:00:00+02:00</updated><id>https://fabpl.github.io/laravel/2020/09/19/url-shortener</id><content type="html" xml:base="https://fabpl.github.io/laravel/2020/09/19/url-shortener.html">&lt;p&gt;Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants :&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;T&lt;/strong&gt;ailwindCss&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;A&lt;/strong&gt;lpine.js&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;L&lt;/strong&gt;aravel&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;L&lt;/strong&gt;ivewire&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé.
-Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h1 id=&quot;sommaire&quot;&gt;Sommaire&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-installation-laravel.html&quot;&gt;Installation de Laravel 8&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-authentification.html&quot;&gt;Authentification&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/laravel/2020/09/20/url-shortener-tailwind-welcome.html&quot;&gt;Tailwind - Welcome&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;…&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;liens&quot;&gt;Liens&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/fabpl/url-shortener&quot;&gt;Code source&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel livewire tailwindcss url-shortener" /><summary type="html">Il y a quelques semaines, j’ai lu un article sur la stack TALL. Oui encore un acronyme pour désigner les éléments suivants : TailwindCss Alpine.js Laravel Livewire Bref, le combo pour créer une application web dynamique du front au back, en passant par de l’UX bien pensé. Il me fallait donc une idée de projet pour découvrir tout ça : Un raccourcisseur d’URL (ou URL Shortener).</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Fabrice Planchette</name></author><category term="laravel" /><category term="php laravel" /><summary type="html">Au commencement il n’y avait rien, puis Laravel 8 est arrivé.</summary></entry></feed>

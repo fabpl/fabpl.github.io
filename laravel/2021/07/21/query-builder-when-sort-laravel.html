@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Les scopes dans les modèles Laravel | Fabrice Planchette</title>
+<title>Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel | Fabrice Planchette</title>
 <meta name="generator" content="Jekyll v4.1.0" />
-<meta property="og:title" content="Les scopes dans les modèles Laravel" />
+<meta property="og:title" content="Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel" />
 <meta name="author" content="Fabrice Planchette" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle. On va donc avoir ce qui peut modifier la requête du Query Builder de ce modèle dans celui-ci et pas ailleurs." />
-<meta property="og:description" content="Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle. On va donc avoir ce qui peut modifier la requête du Query Builder de ce modèle dans celui-ci et pas ailleurs." />
-<link rel="canonical" href="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html" />
-<meta property="og:url" content="https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html" />
+<meta name="description" content="Dans la continuité des scopes, la modification du Query Builder peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode when()." />
+<meta property="og:description" content="Dans la continuité des scopes, la modification du Query Builder peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode when()." />
+<link rel="canonical" href="https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html" />
+<meta property="og:url" content="https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html" />
 <meta property="og:site_name" content="Fabrice Planchette" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-06-18T07:00:00+02:00" />
+<meta property="article:published_time" content="2021-07-21T07:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Les scopes dans les modèles Laravel" />
+<meta property="twitter:title" content="Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel" />
 <meta name="twitter:site" content="@fplanchette" />
 <meta name="twitter:creator" content="@fplanchette" />
 <script type="application/ld+json">
-{"datePublished":"2021-06-18T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html","description":"Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle. On va donc avoir ce qui peut modifier la requête du Query Builder de ce modèle dans celui-ci et pas ailleurs.","@type":"BlogPosting","headline":"Les scopes dans les modèles Laravel","dateModified":"2021-06-18T07:00:00+02:00","@context":"https://schema.org"}</script>
+{"datePublished":"2021-07-21T07:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html"},"author":{"@type":"Person","name":"Fabrice Planchette"},"url":"https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html","description":"Dans la continuité des scopes, la modification du Query Builder peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode when().","@type":"BlogPosting","headline":"Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel","dateModified":"2021-07-21T07:00:00+02:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -105,7 +105,7 @@
                         <div class="mt-32">
                             <div class="text-center mt-12">
     <h1 class="font-semibold leading-normal mb-2 text-gray-800 mb-2 text-4xl">
-        Les scopes dans les modèles Laravel
+        Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel
     </h1>
     <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
         <div class="flex items-center justify-center">
@@ -113,7 +113,7 @@
                 <path fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                       clip-rule="evenodd"/>
-            </svg>Jun 18, 2021
+            </svg>Jul 21, 2021
         </div>
     </div>
 </div>
@@ -121,93 +121,52 @@
 <div class="mt-10 py-10 border-t border-gray-300">
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-9/12 px-4">
-            <p>Dans les modèles, l’utilisation des scopes va permettre d’ajouter de la logique dans le modèle.
-On va donc avoir ce qui peut modifier la requête du <code class="language-plaintext highlighter-rouge">Query Builder</code> de ce modèle dans celui-ci et pas ailleurs.</p>
+            <p>Dans la continuité des scopes, la modification du <code class="language-plaintext highlighter-rouge">Query Builder</code> peut être fait selon les paramètres envoyés dans la requête en utilisant la méthode <code class="language-plaintext highlighter-rouge">when()</code>.</p>
 
 <!--more-->
 
-<h2 id="scope-">Scope ?</h2>
+<h2 id="when-">when() ?</h2>
 
-<p>Imagine tu as une table posts (et son modèle Post), et que dans cette table tu as une colonne vote (je t’explique pas pourquoi cette colonne, t’as compris).
-Pour récupérer les posts ayant reçu plus de 100 votes, ça donnerait :</p>
+<p>Imagine que tu veuilles proposer le tri des résultats d’un modèle.
+Pour cela non, ne fonce pas tête baissée sur un <code class="language-plaintext highlighter-rouge">if</code> ou un <code class="language-plaintext highlighter-rouge">switch</code> dans ton controlleur, on a dit d’une que <a href="c'était plus joli dans un `scope` du modèle">https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html</a>, et de deux qu’avec un <code class="language-plaintext highlighter-rouge">when()</code> en plus ça devient beautiful.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">'votes'</span><span class="p">,</span> <span class="s1">'&gt;'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// Dans le controlleur</span>
+<span class="nx">Model</span><span class="o">::</span><span class="na">filter</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 
-<p>Mais en mettant ça dans un scope, cela devient :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="c1">// Méthode à placer dans le modèle</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">scopePopular</span><span class="p">(</span><span class="nv">$query</span><span class="p">)</span>
+<span class="c1">// Et dans le modèle</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">filter</span><span class="p">(</span><span class="nx">Builder</span> <span class="nv">$builder</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span><span class="o">:</span> <span class="nx">Builder</span>
 <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">'votes'</span><span class="p">,</span> <span class="s1">'&gt;'</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="nv">$sort</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'sort'</span><span class="p">);</span>
 
-<span class="c1">// Et pour récupérer ces articles</span>
-<span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">popular</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span></code></pre></figure>
+    <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">when</span><span class="p">(</span>
+        <span class="nv">$sort</span><span class="p">,</span> 
+        <span class="k">function</span><span class="p">(</span><span class="nx">Builder</span> <span class="nv">$builder</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$sort</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="nv">$sort</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="s1">'name'</span> <span class="o">:</span> <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">orderByName</span><span class="p">();</span>
+                <span class="k">case</span> <span class="s1">'created_at'</span> <span class="o">:</span> <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">orderByCreatedAt</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span> 
+        <span class="k">function</span><span class="p">(</span><span class="nx">Builder</span> <span class="nv">$builder</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">orderByName</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
 
-<p>Joli non ?</p>
-
-<h2 id="date-de-création-dans-un-intervalle-donné">Date de création dans un intervalle donné</h2>
-
-<p>Imagine (encore) que tu as ce même modèle Post et que tu veux récupérer les entrées créées entre 2 dates. 
-Si tu fonces tête baissée, ça donne :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> 
-<span class="nv">$startDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-05-17'</span><span class="p">);</span> 
-<span class="nv">$endDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-06-17'</span><span class="p">);</span>
-
-<span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">whereBetween</span><span class="p">(</span><span class="s1">'created_at'</span><span class="p">,</span> <span class="err">'</span><span class="p">[</span><span class="nv">$startDate</span><span class="p">,</span> <span class="nv">$endDate</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span> </code></pre></figure>
-
-<p>Ok, ça marche. Sauf que <code class="language-plaintext highlighter-rouge">created_at</code> est un <code class="language-plaintext highlighter-rouge">datetime</code>, donc la partie heure/minute/seconde passe à la trappe et tu
-perds 24h sur la dernière journée. Ah! le piège!</p>
-
-<p>Bon en fait, le plus simple serait de ne pas utiliser de <code class="language-plaintext highlighter-rouge">BETWEEN</code> dans ce cas mais simplement de borner en utilisant la
-méthode <code class="language-plaintext highlighter-rouge">whereDate()</code>. Voici ce que ça donne :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> 
-<span class="nv">$startDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-05-17'</span><span class="p">);</span> 
-<span class="nv">$endDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-06-17'</span><span class="p">);</span>
-
-<span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">whereDate</span><span class="p">(</span><span class="s1">'created_at'</span><span class="p">,</span> <span class="s1">'&gt;='</span><span class="p">,</span> <span class="nv">$startDate</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">whereDate</span><span class="p">(</span><span class="s1">'created_at'</span><span class="p">,</span> <span class="s1">'&lt;='</span><span class="p">,</span> <span class="nv">$endDate</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span> </code></pre></figure>
-
-<p>C’est sympa mais comme on ne veut pas réécrire ça à chaque fois (#dry), on va déplacer ça dans… un scope ! Bien tu suis !</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> 
-<span class="k">public</span> <span class="k">function</span> <span class="nf">scopeCreatedBetweenDates</span><span class="p">(</span><span class="nx">Builder</span> <span class="nv">$builder</span><span class="p">,</span> <span class="nx">DateTimeInterface</span> <span class="nv">$startDate</span><span class="p">,</span> <span class="nx">DateTimeInterface</span> <span class="nv">$endDate</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="k">return</span> <span class="nv">$builder</span>
-        <span class="o">-&gt;</span><span class="na">whereDate</span><span class="p">(</span><span class="s1">'created_at'</span><span class="p">,</span> <span class="s1">'&gt;='</span><span class="p">,</span> <span class="nv">$startDate</span><span class="p">)</span>
-        <span class="o">-&gt;</span><span class="na">whereDate</span><span class="p">(</span><span class="s1">'created_at'</span><span class="p">,</span> <span class="s1">'&lt;='</span><span class="p">,</span> <span class="nv">$endDate</span><span class="p">)</span>
-<span class="p">}</span> </code></pre></figure>
-
-<p>Et pour l’utiliser, rien de plus simple :</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> 
-<span class="nv">$startDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-05-17'</span><span class="p">);</span> 
-<span class="nv">$endDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">,</span> <span class="s1">'2021-06-17'</span><span class="p">);</span>
-
-<span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">createdBetweenDates</span><span class="p">(</span><span class="nv">$startDate</span><span class="p">,</span> <span class="nv">$endDate</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span> </code></pre></figure>
-
-<p>C’est sympa les scopes hein ?!</p>
+<p>Tu l’as vu ? Le deuxième paramètre de <code class="language-plaintext highlighter-rouge">when()</code> ? Et oui, ça te permet de gérer du fallback si tu veux.</p>
 
 <h2 id="liens">Liens</h2>
 <ul>
-  <li><a href="https://laravel.com/docs/8.x/eloquent#local-scopes">Documentation Laravel Eloquent Scopes</a></li>
-  <li><a href="https://laravel.com/docs/8.x/queries#additional-where-clauses">Documentation Laravel Queries</a></li>
+  <li><a href="https://laravel.com/docs/8.x/queries#conditional-clauses">Documentation Laravel Queries</a></li>
 </ul>
 
         </div>
 
         <div class="border-t border-gray-300 mt-10 py-10 w-full lg:w-9/12 px-4 flex justify-between">
             
-            <a href="/laravel/2021/05/12/macro-laravel.html">
-                &laquo;&nbsp;Créer une macro sous Laravel
+            <a href="/laravel/2021/06/18/scope-model-eloquent-laravel.html">
+                &laquo;&nbsp;Les scopes dans les modèles Laravel
             </a>
             
-            
-            <a href="/laravel/2021/07/21/query-builder-when-sort-laravel.html">
-                Utilisation de la méthode when() du query builder pour gérer le tri dans Laravel&nbsp;&raquo;
-            </a>
             
         </div><div class="mt-10 py-10 border-t border-gray-300 text-center w-full">
     <div class="flex flex-wrap justify-center">
@@ -215,8 +174,8 @@ méthode <code class="language-plaintext highlighter-rouge">whereDate()</code>. 
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
-                    this.page.url = 'https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html';
-                    this.page.identifier = 'https://fabpl.github.io/laravel/2021/06/18/scope-model-eloquent-laravel.html';
+                    this.page.url = 'https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html';
+                    this.page.identifier = 'https://fabpl.github.io/laravel/2021/07/21/query-builder-when-sort-laravel.html';
                 };
 
                 (function () {
